@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\GoogleAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/auth/redirect', function () {
+    if (auth()->check()) return redirect('/dashboard');
+    return Socialite::driver('google')->redirect();
+})->name('google_auth');
+
+Route::get('/auth/callback', [GoogleAuthController::class, 'handleLogin']);
+
+Route::get('/dashboard', function() {
+    return view('dashboard');
+})->middleware('auth');
