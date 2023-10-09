@@ -89,7 +89,7 @@
                     </dialog>
                 </div>
             </div>
-            <div id="new" class="mt-10">
+            <div id="new" class="mt-5">
                 <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">新着</div>
                 <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
                     <div class="carousel-item sm:mx-[12px] mx-[5px]">
@@ -140,6 +140,51 @@
                             <button>close</button>
                         </form>
                     </dialog>
+                </div>
+            </div>
+            <div id="new" class="mt-10">
+                <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
+                <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
+                    <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5">
+                        <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
+                        <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
+                            <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
+                            <div class="flex justify-between text-[12px] md:text-[16px]">
+                                <div>投稿日: 2021/01/01</div>
+                                <div>クリエイター: soradore</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5">
+                        <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
+                        <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
+                            <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
+                            <div class="flex justify-between text-[12px] md:text-[16px]">
+                                <div>投稿日: 2021/01/01</div>
+                                <div>クリエイター: soradore</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5">
+                        <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
+                        <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
+                            <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
+                            <div class="flex justify-between text-[12px] md:text-[16px]">
+                                <div>投稿日: 2021/01/01</div>
+                                <div>クリエイター: soradore</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5">
+                        <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
+                        <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
+                            <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
+                            <div class="flex justify-between text-[12px] md:text-[16px]">
+                                <div>投稿日: 2021/01/01</div>
+                                <div>クリエイター: soradore</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
