@@ -35,7 +35,11 @@
                 <img class="w-full" src="{{ Vite::asset('resources/images/eyecatch.png') }}" />
             </div>
             <div id="trend" class="mt-10">
-                <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">トレンド</div>
+                <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px] flex items-center justify-center" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                    <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/heart_new.png') }}" />
+                    トレンド
+                    <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/heart_new.png') }}" />
+                </div>
                 <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
                     <!-- Open the modal using ID.showModal() method -->
                     <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer">
@@ -93,7 +97,11 @@
                 </div>
             </div>
             <div id="new" class="mt-5">
-                <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">新着</div>
+                <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px] flex items-center justify-center" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
+                    <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/new_offer_symbol.png') }}" />
+                    新着
+                    <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/new_offer_symbol.png') }}" />
+                </div>
                 <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
                     <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer">
                         <img onclick="openModal('my_modal_10', 'test123123', 'test')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
