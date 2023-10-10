@@ -18,7 +18,10 @@
                 <div class="font-cpfont text-4xl ml-9 text-myaccent">ポスクラ</div>
                 <div class="sm:top-0 sm:right-0 pr-7 mr-7 h-11 leading-10 my-10 text-mydark font-yusei">
                     @auth
-                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ダッシュボード</a>
+                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 flex items-center">
+                            <img class="mx-2" src="{{ Vite::asset('resources/images/icon_steve.png') }}" />
+                            <div>{{ auth()->user()->name }}</div>
+                        </a>
                     @else
                         <a href="{{ route('google_auth') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">ログイン / 登録</a>
                     @endauth
