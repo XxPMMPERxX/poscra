@@ -158,7 +158,7 @@
         </div>
     </div>
     <div class="mt-7 flex justify-center">
-        <button class="btn bg-mydark text-mywhite w-[140px] h-[35px] text-[15px] font-yusei" onclick="new_post_modal.showModal()"><i class="fa-regular fa-square-plus"></i>新規追加</button>
+        <button class="btn bg-mydark text-mywhite w-[140px] h-[35px] text-[15px] font-yusei hover:bg-mydark/80" onclick="new_post_modal.showModal()"><i class="fa-regular fa-square-plus"></i>新規追加</button>
         <dialog id="new_post_modal" class="modal">
             <div class="modal-box max-w-[1190px] flex py-5 px-10 gap-[24px] bg-mywhite">
                 <div class="flex items-center justify-center w-3/5">
