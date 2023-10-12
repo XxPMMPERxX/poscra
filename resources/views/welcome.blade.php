@@ -42,7 +42,7 @@
             </dialog>
             <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
                 <div class="absolute text-mydark font-yusei sm:text-[14px] bg-myaccent sm:w-[34px] sm:h-[26px] text-center sm:leading-[26px] rounded-tl-[20px] text-[10px] w-[25px] h-[18px] leading-[18px]">3位</div>
-                <img onclick="openModal('my_modal_3', 'test1231233', 'test3')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
+                <img onclick="openModal('my_modal_3', 'test1231233', 'test3')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/test.png') }}" />
             </div>
             <dialog id="my_modal_3" class="modal">
                 <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
@@ -129,7 +129,7 @@
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
         <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
             <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
-                <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
+                <figure class="h-[225px]"><img class="object-cover" src="{{ Vite::asset('resources/images/test.png') }}" alt="Shoes" /></figure>
                 <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
                     <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
                     <div class="flex justify-between text-[12px] md:text-[16px]">

@@ -39,6 +39,10 @@
                 </div>
             </div>
             {{ $slot }}
+            <div class="flex justify-center my-10 font-yusei text-mydark divide-x-2 divide-mydark/25 items-center">
+                <div class="w-2/4 flex justify-end pr-5"><div><i class="fa-regular fa-copyright"></i> 2023 ポスクラ</div></div>
+                <div class="w-2/4 flex justify-start pl-5"><a href=""><i class="fa-brands fa-x-twitter text-[30px]"></i></a></div>
+            </div>
         </div>
     </body>
 </html>
