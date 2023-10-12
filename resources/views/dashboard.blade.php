@@ -185,7 +185,7 @@
                         </div>
                     </div>
                     <input type="file" class="file-input file-input-bordered w-full bg-mywhite border-mydark" id="structure" name="structure" accept=".mcstructure"/>
-                    <button class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 mt-auto">投稿</button>
+                    <button class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 mt-auto" disabled="disabled"><i class="fa-solid fa-paper-plane"></i>投稿</button>
                 </div>
             </div>
             <form method="dialog" class="modal-backdrop">
