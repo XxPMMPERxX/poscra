@@ -184,7 +184,7 @@
                             <i class="fa-solid fa-circle-question mx-2 mb-1"></i>
                         </div>
                     </div>
-                    <input type="file" class="file-input file-input-bordered w-full bg-mywhite border-mydark" id="structure" name="structure" />
+                    <input type="file" class="file-input file-input-bordered w-full bg-mywhite border-mydark" id="structure" name="structure" accept=".mcstructure"/>
                 </div>
             </div>
             <form method="dialog" class="modal-backdrop">
