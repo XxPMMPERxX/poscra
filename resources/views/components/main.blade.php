@@ -9,6 +9,7 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="antialiased">
@@ -44,5 +45,6 @@
                 <div class="w-2/4 flex justify-start pl-5"><a href=""><i class="fa-brands fa-x-twitter text-[30px]"></i></a></div>
             </div>
         </div>
+        @livewireScripts
     </body>
 </html>

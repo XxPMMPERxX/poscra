@@ -129,7 +129,7 @@
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
         <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
             <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
-                <figure class="h-[225px]"><img class="object-cover" src="{{ Vite::asset('resources/images/test.png') }}" alt="Shoes" /></figure>
+                <figure class="md:h-[225px] h-[155px]"><img class="object-cover" src="{{ Vite::asset('resources/images/test.png') }}" alt="Shoes" /></figure>
                 <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
                     <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
                     <div class="flex justify-between text-[12px] md:text-[16px]">
