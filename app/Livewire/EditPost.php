@@ -20,8 +20,8 @@ class EditPost extends Component
     public $attachment_type; // [image] or [3dmodel]
     public $thumbnail;       // 3dデータを画像化もしくは画像そのまま
 
-    private $structure_name; // mcstructure の structureName
-    private $attachment_path;
+    public $structure_name; // mcstructure の structureName
+    public $attachment_path;
 
     protected $rules = [
         'title' => 'required|max:20',
@@ -67,6 +67,7 @@ class EditPost extends Component
 
     public function updatedThumbnail(){
         logger($this->thumbnail->getClientOriginalName());
+        //$this->thumbnail->store('public');
     }
 
     public function updatedMcstructure(){
@@ -77,8 +78,23 @@ class EditPost extends Component
         $this->validateOnly($propertyName);
     }
 
+    /**
+     * EventListener
+     */
     public function setThumbnail() {
         $this->dispatch('setThumbnail');
+    }
+
+    public function clearAttachment() {
+        if($this->attachment_path) {
+            Storage::delete($this->attachment_path);
+        }
+        $this->reset([
+            'attachment', 
+            'attachment_type', 
+            'attachment_path', 
+            'thumbnail'
+        ]);
     }
 
     public function save(){

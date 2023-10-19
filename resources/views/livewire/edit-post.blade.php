@@ -3,10 +3,17 @@
     <dialog id="new_post_modal" class="modal" wire:ignore.self>
         <div class="modal-box max-w-[1190px] bg-mywhite">
             <form class="flex flex-col md:flex-row md:py-5 md:px-10 md:gap-[24px] gap-[10px]" wire:submit.prevent="save">
-                <div class="md:w-3/5 w-full relative">
+                <div class="md:w-3/5 w-full relative group">
+                    @if ($attachment)
+                        <div class="absolute z-10 top-[10px] right-[10px] group-hover:block hidden">
+                            <button type="button" class="btn btn-square text-error min-h-0" wire:click="clearAttachment">
+                                <i class="fa-regular fa-trash-can text-xl"></i>
+                            </button>
+                        </div>
+                    @endif
                     @if ($attachment_type === 'image')
                         <div>
-                            <img class="object-cover h-[220px] md:h-[430px]" src="{{ $attachment->temporaryUrl() }}" />
+                            <img class="object-contain h-[220px] md:h-[430px]" src="{{ $attachment->temporaryUrl() }}" />
                         </div>
                     @endif
                     @if (!$attachment)
@@ -20,8 +27,8 @@
                             </div>
                         </label>
                     @endif
-                    <div class="absolute z-10 bottom-[10px] right-[10px] @if($attachment_type !== '3dmodel') hidden @endif">
-                        <button type="button" class="btn bg-mywhite disabled:opacity-75 disabled:!bg-mywhite" id="set_thumbnail" wire:click="setThumbnail" wire:ignore.self>サムネイルとして設定</button>
+                    <div class="absolute z-10 bottom-[10px] left-[10px] @if($attachment_type !== '3dmodel') hidden @endif">
+                        <button type="button" class="btn bg-mywhite disabled:opacity-75 disabled:!bg-mywhite font-yusei" id="set_thumbnail" wire:click="setThumbnail" wire:ignore.self>サムネイルとして設定</button>
                     </div>
                     <div id="main_canvas" class="relative w-full h-[220px] md:h-[430px] @if($attachment_type !== '3dmodel') hidden @endif">
                         <canvas id="mcstructure_preview" class="" wire:ignore.self></canvas>
