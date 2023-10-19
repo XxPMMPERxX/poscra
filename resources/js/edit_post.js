@@ -36,7 +36,7 @@ dropzone.addEventListener('drop', (ev) => {
 });
 
 window.addEventListener('setThumbnail', (ev) => {
-    console.log(ev);
+    //console.log(ev);
     setThumbnail.disabled = true;
     canvas.toBlob(function (blob) {
         const file = new File([blob], 'thumbnail.png', { type: "image/png" });
