@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\GoogleAuthController;
@@ -26,6 +27,4 @@ Route::get('/auth/redirect', function () {
 
 Route::get('/auth/callback', [GoogleAuthController::class, 'handleLogin']);
 
-Route::get('/dashboard', function() {
-    return view('dashboard');
-})->middleware('auth');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');

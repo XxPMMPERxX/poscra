@@ -6,6 +6,7 @@ use Livewire\WithFileUploads;
 use Livewire\Component;
 use App\Models\Post;
 use App\Models\Attachment;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,7 +22,7 @@ class EditPost extends Component
     public $thumbnail;       // 3dデータを画像化もしくは画像そのまま
 
     public $structure_name; // mcstructure の structureName
-    public $attachment_path;
+    public $attachment_path; // 3dmodelのパス（プレビュー用）
 
     protected $rules = [
         'title' => 'required|max:20',
@@ -42,7 +43,7 @@ class EditPost extends Component
             return;
         }
 
-        //logger($this->attachment->getMimeType());
+        logger($this->attachment->getClientOriginalName());
         $fileName = $this->attachment->getClientOriginalName();
         $extenstion = File::extension($fileName);
         //logger($extenstion);
@@ -62,6 +63,8 @@ class EditPost extends Component
                 }
                 $this->attachment_path = $this->attachment->store('public');
                 $this->dispatch('update_preview', preview_url: Storage::url($this->attachment_path));
+            default:
+                $this->addError('attachment_file_error', 'ファイル形式が不正です');
         }
     }
 
@@ -71,7 +74,8 @@ class EditPost extends Component
     }
 
     public function updatedMcstructure(){
-        $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
+        //$this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
+        //$this->reset(['mcstructure']);
     }
 
     public function updated($propertyName) {
@@ -100,6 +104,29 @@ class EditPost extends Component
     public function save(){
         //
         logger('save');
+        $this->validate();
+        logger('clear validation');
+
+        DB::transaction(function () {
+            $post = new Post();
+            $post->title = $this->title;
+            $post->user_id = auth()->user()->id;
+            $post->description = $this->description;
+            $post->save();
+
+            $attachment = new Attachment();
+            $attachment->post_id = $post->id;
+            $attachment->thumbnail = $this->thumbnail->store('public');
+            $attachment->structure = $this->mcstructure->store('public');
+            $attachment->structure_name = $this->structure_name ?? 'mystructure:test_daaata' . time();
+            $attachment->attachment = $this->attachment_path ?? $this->attachment->store('public');
+            $attachment->attachment_type = $this->attachment_type;
+            $attachment->save();
+
+            $this->dispatch('closeEdit');
+            $this->reset();
+        });
+        
     }
 
 }

@@ -4,9 +4,20 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
 
 const dropzone = document.getElementById('dropzone');
 const targetInput = document.getElementById('dropzone-file');
-const thumbnailInput = document.getElementById('thumbnail_image');
-const setThumbnail = document.getElementById('set_thumbnail');
+const thumbnailInput = document.getElementById('thumbnail_image'); // 
+const setThumbnail = document.getElementById('set_thumbnail'); // button
+
+const editModal = document.getElementById('new_post_modal');
+const mcstructure = document.getElementById('structure');
+
 const canvas = document.getElementById("mcstructure_preview");
+
+const editSubmit = document.getElementById('edit_submit');
+editSubmit.onclick = (ev) => {
+    if (targetInput.files.length != 0 && !setThumbnail.disabled) {
+        confirm('サムネイルが設定されていません。そのまま続けますか？') || ev.stopImmediatePropagation()
+    }
+}
 
 
 targetInput.addEventListener('change', (ev) => {
@@ -46,6 +57,13 @@ window.addEventListener('setThumbnail', (ev) => {
         thumbnailInput.dispatchEvent(new Event('change'));
     });
 });
+
+window.addEventListener('closeEdit', (ev) => {
+    thumbnailInput.value = '';
+    targetInput.value = '';
+    mcstructure.value = '';
+    editModal.close();
+})
 
 window.addEventListener('update_preview', (ev) => {
     const renderer = new THREE.WebGLRenderer({
@@ -92,7 +110,8 @@ window.addEventListener('update_preview', (ev) => {
             onResize();
         },
         function (xhr) {
-            //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+            
+            console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
         function (error) {
             //console.log('An error happened');

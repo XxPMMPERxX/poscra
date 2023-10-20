@@ -11,6 +11,8 @@ use Ramsey\Uuid\Uuid;
 class Attachment extends Model
 {
     use HasFactory, HasUuids;
+     
+    protected $table = "attachment";
 
     public function newUniqueId(): string
     {
