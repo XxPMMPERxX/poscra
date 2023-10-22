@@ -5,6 +5,6 @@ window.openModal = function(modalId, postId, postTitle = '') {
     modal.showModal();
     history.pushState({}, postTitle, postURL);
     modal.onclose = function(){
-        history.pushState({}, '', '/');
+        history.back();
     }
 };

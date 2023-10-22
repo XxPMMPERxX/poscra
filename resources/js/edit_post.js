@@ -58,12 +58,12 @@ window.addEventListener('setThumbnail', (ev) => {
     });
 });
 
-window.addEventListener('closeEdit', (ev) => {
+/*window.addEventListener('closeEdit', (ev) => {
     thumbnailInput.value = '';
     targetInput.value = '';
     mcstructure.value = '';
     editModal.close();
-})
+}); */
 
 window.addEventListener('update_preview', (ev) => {
     const renderer = new THREE.WebGLRenderer({

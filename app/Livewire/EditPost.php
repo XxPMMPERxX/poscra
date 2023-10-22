@@ -123,8 +123,10 @@ class EditPost extends Component
             $attachment->attachment_type = $this->attachment_type;
             $attachment->save();
 
-            $this->dispatch('closeEdit');
+            //$this->dispatch('closeEdit');
             $this->reset();
+
+            return redirect('/dashboard');
         });
         
     }

@@ -128,46 +128,17 @@
     <div id="new" class="mt-10">
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
         <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
-            <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
-                <figure class="md:h-[225px] h-[155px]"><img class="object-cover" src="{{ Vite::asset('resources/images/test.png') }}" alt="Shoes" /></figure>
-                <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
-                    <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
-                    <div class="flex justify-between text-[12px] md:text-[16px]">
-                        <div>投稿日: 2021/01/01</div>
-                        <div>クリエイター: soradore</div>
+            @foreach ($posts as $post)
+                <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
+                    <figure class="md:h-[225px] h-[155px]"><img class="object-cover" src="{{ Storage::url($post->attachment->thumbnail) }}" alt="" /></figure>
+                    <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
+                        <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
+                        <div class="flex justify-between text-[12px] md:text-[16px]">
+                            <div>投稿日: {{ $post->created_at->format('Y/m/d') }}</div>
+                            <div>クリエイター: {{ $post->user->name }}</div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
-                <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
-                <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
-                    <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
-                    <div class="flex justify-between text-[12px] md:text-[16px]">
-                        <div>投稿日: 2021/01/01</div>
-                        <div>クリエイター: soradore</div>
-                    </div>
-                </div>
-            </div>
-            <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
-                <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
-                <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
-                    <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
-                    <div class="flex justify-between text-[12px] md:text-[16px]">
-                        <div>投稿日: 2021/01/01</div>
-                        <div>クリエイター: soradore</div>
-                    </div>
-                </div>
-            </div>
-            <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
-                <figure><img src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" alt="Shoes" /></figure>
-                <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[8px] !gap-0">
-                    <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px]">和風ビル（内装は無いそうです）</h2>
-                    <div class="flex justify-between text-[12px] md:text-[16px]">
-                        <div>投稿日: 2021/01/01</div>
-                        <div>クリエイター: soradore</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            @endforeach
     </div>
 </x-main>
