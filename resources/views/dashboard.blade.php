@@ -84,20 +84,9 @@
         </div>
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
             @foreach($myposts as $mypost)
-                <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
-                    <img onclick="openModal('modal_{{ $mypost->id }}', '{{ $mypost->id }}', '{{ $mypost->title }}')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Storage::url($mypost->attachment->thumbnail) }}" />
-                </div>
-                <dialog id="modal_{{ $mypost->id }}" class="modal">
-                    <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                        <h3 class="font-bold text-lg">Hello!</h3>
-                        <p class="py-4">Press ESC key or click outside to close</p>
-                    </div>
-                    <form method="dialog" class="modal-backdrop">
-                        <button>close</button>
-                    </form>
-                </dialog>
+                <livewire:edit-post :post="$mypost" :wire:key="$mypost->id" />
             @endforeach
         </div>
     </div>
-    <livewire:edit-post />
+    <livewire:create-post />
 </x-main>

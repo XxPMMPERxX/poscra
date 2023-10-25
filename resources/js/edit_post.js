@@ -1,7 +1,3 @@
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls"
-
 const dropzone = document.getElementById('dropzone');
 const targetInput = document.getElementById('dropzone-file');
 const thumbnailInput = document.getElementById('thumbnail_image'); // 
@@ -12,17 +8,15 @@ const mcstructure = document.getElementById('structure');
 
 const canvas = document.getElementById("mcstructure_preview");
 
-const editSubmit = document.getElementById('edit_submit');
-editSubmit.onclick = (ev) => {
-    if (targetInput.files.length != 0 && !setThumbnail.disabled) {
+/*const editSubmit = document.getElementById('edit_submit');
+
+editSubmit.addEventListener('click',(ev) => {
+    const previewImage = document.getElementById('preview_image');
+    console.log(previewImage, !previewImage);
+    if (!previewImage && targetInput.files.length != 0 && !setThumbnail.disabled) {
         confirm('サムネイルが設定されていません。そのまま続けますか？') || ev.stopImmediatePropagation()
     }
-}
-
-
-targetInput.addEventListener('change', (ev) => {
-    console.log(ev);
-});
+}, true);*/
 
 dropzone.addEventListener('dragover', (ev) => {
     ev.preventDefault();
