@@ -26,6 +26,7 @@ class EditPost extends Component
     public $structure_name; // mcstructure の structureName
     public $attachment_path; // 3dmodelのパス（プレビュー用）
 
+    public $isAttachmentChanged;
     protected $rules = [
         'title' => 'required|max:20',
         'description' => 'max:100',
@@ -73,7 +74,7 @@ class EditPost extends Component
             default:
                 $this->addError('attachment_file_error', 'ファイル形式が不正です');
         }
-        $this->rules['thumbnail'] = 'required';
+        $this->isAttachmentChanged = true;
     }
 
     public function updatedThumbnail(){
@@ -107,9 +108,11 @@ class EditPost extends Component
     }
 
     public function save(){
-        //
-        //logger('save');
-        $this->validate();
+        $this->validate(
+            $this->isAttachmentChanged ? 
+                array_merge($this->rules, ['thumbnail'=>'required'])
+                : $this->rules
+        );
         //logger('clear validation');
 
         DB::transaction(function () {
