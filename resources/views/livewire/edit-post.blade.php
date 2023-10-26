@@ -110,69 +110,53 @@
         });
 
         window.addEventListener('update_preview_{{ str_replace('-', '_', $post->id) }}', (ev) => {
-            //console.log(canvas_{{ str_replace('-', '_', $post->id) }})
             const renderer = new THREE.WebGLRenderer({
                 canvas: canvas_{{ str_replace('-', '_', $post->id) }},
                 antialias: true,
                 preserveDrawingBuffer: true,
             });
-            // ウィンドウサイズ設定
             let width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
             let height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
-            //console.log(width, height);
+
             renderer.setPixelRatio(1);
             renderer.setSize(width, height);
-            //console.log(window.devicePixelRatio);
-            //console.log(width + ", " + height);
 
-            // シーンを作成
             const scene = new THREE.Scene();
 
-            // カメラを作成
             const camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
-            camera.position.set(0, 3000, -12000);
+            camera.position.set(0, -5000, -20000);
 
             const controls = new OrbitControls(camera, document.getElementById('main_canvas_{{ str_replace('-', '_', $post->id) }}'));
             controls.addEventListener("change", function (ev) {
                 setThumbnail_{{ str_replace('-', '_', $post->id) }}.disabled = false;
             });
-            //camera.lookAt(new THREE.Vector3(0, 400, 0));
 
-            // Load GLTF or GLB
             const loader = new GLTFLoader();
             const url = ev.detail.preview_url;
 
-            //console.log(url);
             let model = null;
             loader.load(
                 url,
                 function (gltf) {
                     model = gltf.scene;
-                    model.name = "model_with_cloth";
+                    model.name = "structure";
                     model.scale.set(400.0, 400.0, 400.0);
-                    model.position.set(0, -5000, 0);
+                    model.position.set(0, 0, 0);
                     scene.add(gltf.scene);
-                    // 初期化のために実行
                     onResize();
                 },
                 function (xhr) {
-                    
                     console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
                 },
                 function (error) {
-                    //console.log('An error happened');
                     console.error(error);
                 }
             );
 
-            // 平行光源
             const light = new THREE.AmbientLight(0xFFFFFF, 5.0);
-            /*light.intensity = 2; */
             light.position.set(1, 1, 1);
-            // シーンに追加
             scene.add(light);
 
-            // 初回実行
             tick();
             function tick() {
                 controls.update();
@@ -180,21 +164,16 @@
                 requestAnimationFrame(tick);
             }
 
-            // リサイズイベント発生時に実行
             window.addEventListener('resize', onResize);
             function onResize() {
-                // サイズを取得
                 width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
                 height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
 
-                // レンダラーのサイズを調整する
                 renderer.setPixelRatio(window.devicePixelRatio);
                 renderer.setSize(width, height);
 
-                // カメラのアスペクト比を正す
                 camera.aspect = width / height;
                 camera.updateProjectionMatrix();
-                //console.log(width);
             }
         })
     </script>
