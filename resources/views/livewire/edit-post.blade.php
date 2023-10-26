@@ -1,5 +1,5 @@
-<div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
-    <img onclick="edit_modal_{{ str_replace('-', '_', $post->id) }}.showModal()" wire:click="init" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Storage::url($post->attachment->thumbnail) }}" />
+<div class="carousel-item sm:mx-[12px] mx-[5px] hover:opacity-70 duration-500">
+    <img onclick="edit_modal_{{ str_replace('-', '_', $post->id) }}.showModal()" wire:click="init" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px] cursor-pointer" src="{{ Storage::url($post->attachment->thumbnail) }}" />
     <dialog id="edit_modal_{{ str_replace('-', '_', $post->id) }}" class="modal" wire:ignore.self>
         <div class="modal-box max-w-[1190px] bg-mywhite">
             <form class="flex flex-col md:flex-row md:py-5 md:px-10 md:gap-[24px] gap-[10px]" wire:submit.prevent="save">
@@ -58,7 +58,7 @@
                         @error('mcstructure_file_error')<span class="text-error">{{ $message }}</span>@enderror
                     </div>
                     <input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure_{{ str_replace('-', '_', $post->id) }}" name="structure"  wire:model="mcstructure" accept=".mcstructure"/>
-
+                    <button wire:click="remove" wire:confirm="削除すると投稿に紐付いたファイルも削除されます。よろしいですか？" class="btn bg-error text-mywhite w-full text-[15px] font-yusei hover:bg-error/80 md:mt-auto mt-[20px]"><i class="fa-regular fa-trash-can text-xl"></i>削除</button>
                     <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-auto mt-[20px]"><i class="fa-solid fa-paper-plane"></i>更新</button>
                 </div>
             </form>

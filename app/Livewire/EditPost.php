@@ -150,6 +150,16 @@ class EditPost extends Component
         
     }
 
+    public function remove() {
+        Storage::delete([
+            $this->post->attachment->attachment,
+            $this->post->attachment->thumbnail,
+            $this->post->attachment->structure,
+        ]);
+        Post::destroy($this->post->id);
+        return redirect('/dashboard');
+    }
+
     public function init(){
         if ($this->attachment_type == "3dmodel") $this->dispatch('update_preview_' . str_replace('-', '_', $this->post->id), preview_url: Storage::url($this->attachment_path));
     }
