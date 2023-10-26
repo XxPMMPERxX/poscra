@@ -131,7 +131,7 @@
             @foreach ($posts as $post)
                 <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
                     <figure class="md:h-[225px] h-[155px]"><img class="object-cover" src="{{ Storage::url($post->attachment->thumbnail) }}" alt="" /></figure>
-                    <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[0px] !gap-0">
+                    <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[5px] !gap-0">
                         <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px] truncate">{{ $post->title }}</h2>
                         <div class="flex justify-between text-[12px] md:text-[16px]">
                             <div>投稿日: {{ $post->created_at->format('Y/m/d') }}</div>
