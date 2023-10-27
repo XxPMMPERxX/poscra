@@ -68,113 +68,116 @@
         </form>
     </dialog>
     <script>
-        const dropzone_{{ str_replace('-', '_', $post->id) }} = document.getElementById("dropzone_{{ str_replace('-', '_', $post->id) }}");
-        const targetInput_{{ str_replace('-', '_', $post->id) }} = document.getElementById("dropzone-file_{{ str_replace('-', '_', $post->id) }}");
-        const thumbnailInput_{{ str_replace('-', '_', $post->id) }} = document.getElementById("thumbnail_image_{{ str_replace('-', '_', $post->id) }}"); // 
-        const setThumbnail_{{ str_replace('-', '_', $post->id) }} = document.getElementById("set_thumbnail_{{ str_replace('-', '_', $post->id) }}"); // button 
-        
-        const canvas_{{ str_replace('-', '_', $post->id) }} = document.getElementById("mcstructure_preview_{{ str_replace('-', '_', $post->id) }}");
-
-        dropzone_{{ str_replace('-', '_', $post->id) }}.addEventListener('dragover', (ev) => {
-            ev.preventDefault();
-            //console.log(ev);
-        });
-
-        dropzone_{{ str_replace('-', '_', $post->id) }}.addEventListener('dragleave', (ev) => {
-            ev.preventDefault();
-            //console.log(ev);
-        });
-
-        dropzone_{{ str_replace('-', '_', $post->id) }}.addEventListener('drop', (ev) => {
-            ev.preventDefault();
-
-            const files = ev.dataTransfer.files;
-            targetInput.files = files;
-
-            const changeEvent = new Event('change');
-            targetInput.dispatchEvent(changeEvent);
+        (() => {
+            const dropzone = document.getElementById("dropzone_{{ str_replace('-', '_', $post->id) }}");
+            const targetInput = document.getElementById("dropzone-file_{{ str_replace('-', '_', $post->id) }}");
+            const thumbnailInput = document.getElementById("thumbnail_image_{{ str_replace('-', '_', $post->id) }}"); // 
+            const setThumbnail = document.getElementById("set_thumbnail_{{ str_replace('-', '_', $post->id) }}"); // button
             
-            //console.log(targetInput.files);
-        });
+            const canvas = document.getElementById("mcstructure_preview_{{ str_replace('-', '_', $post->id) }}");
 
-        window.addEventListener('setThumbnail_{{ str_replace('-', '_', $post->id) }}', (ev) => {
-            //console.log(ev);
-            setThumbnail_{{ str_replace('-', '_', $post->id) }}.disabled = true;
-            canvas_{{ str_replace('-', '_', $post->id) }}.toBlob(function (blob) {
-                const file = new File([blob], 'thumbnail.png', { type: "image/png" });
-                const dt = new DataTransfer();
-                dt.items.add(file);
-                thumbnailInput_{{ str_replace('-', '_', $post->id) }}.files = dt.files;
-                thumbnailInput_{{ str_replace('-', '_', $post->id) }}.dispatchEvent(new Event('change'));
-            });
-        });
-
-        window.addEventListener('update_preview_{{ str_replace('-', '_', $post->id) }}', (ev) => {
-            const renderer = new THREE.WebGLRenderer({
-                canvas: canvas_{{ str_replace('-', '_', $post->id) }},
-                antialias: true,
-                preserveDrawingBuffer: true,
-            });
-            let width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
-            let height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
-
-            renderer.setPixelRatio(1);
-            renderer.setSize(width, height);
-
-            const scene = new THREE.Scene();
-
-            const camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
-            camera.position.set(0, -5000, -20000);
-
-            const controls = new OrbitControls(camera, document.getElementById('main_canvas_{{ str_replace('-', '_', $post->id) }}'));
-            controls.addEventListener("change", function (ev) {
-                setThumbnail_{{ str_replace('-', '_', $post->id) }}.disabled = false;
+            dropzone.addEventListener('dragover', (ev) => {
+                ev.preventDefault();
+                //console.log(ev);
             });
 
-            const loader = new GLTFLoader();
-            const url = ev.detail.preview_url;
+            dropzone.addEventListener('dragleave', (ev) => {
+                ev.preventDefault();
+                //console.log(ev);
+            });
 
-            let model = null;
-            loader.load(
-                url,
-                function (gltf) {
-                    model = gltf.scene;
-                    model.name = "structure";
-                    model.scale.set(400.0, 400.0, 400.0);
-                    model.position.set(0, 0, 0);
-                    scene.add(gltf.scene);
-                    onResize();
-                },
-                function (xhr) {
-                    console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-                },
-                function (error) {
-                    console.error(error);
-                }
-            );
+            dropzone.addEventListener('drop', (ev) => {
+                ev.preventDefault();
 
-            const light = new THREE.AmbientLight(0xFFFFFF, 5.0);
-            light.position.set(1, 1, 1);
-            scene.add(light);
+                const files = ev.dataTransfer.files;
+                targetInput.files = files;
 
-            tick();
-            function tick() {
-                controls.update();
-                renderer.render(scene, camera);
-                requestAnimationFrame(tick);
-            }
+                const changeEvent = new Event('change');
+                targetInput.dispatchEvent(changeEvent);
+                
+                //console.log(targetInput.files);
+            });
 
-            window.addEventListener('resize', onResize);
-            function onResize() {
-                width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
-                height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
+            window.addEventListener('setThumbnail_{{ str_replace('-', '_', $post->id) }}', (ev) => {
+                //console.log(ev);
+                setThumbnail.disabled = true;
+                canvas.toBlob(function (blob) {
+                    const file = new File([blob], 'thumbnail.png', { type: "image/png" });
+                    const dt = new DataTransfer();
+                    dt.items.add(file);
+                    thumbnailInput.files = dt.files;
+                    thumbnailInput.dispatchEvent(new Event('change'));
+                });
+            });
 
-                renderer.setPixelRatio(window.devicePixelRatio);
+            window.addEventListener('update_preview_{{ str_replace('-', '_', $post->id) }}', (ev) => {
+                const renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    antialias: true,
+                    preserveDrawingBuffer: true,
+                });
+                let width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
+                let height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
+
+                renderer.setPixelRatio(1);
                 renderer.setSize(width, height);
 
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-            }
-        })
+                const scene = new THREE.Scene();
+
+                const camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
+                camera.position.set(0, -5000, -20000);
+
+                const controls = new OrbitControls(camera, document.getElementById('main_canvas_{{ str_replace('-', '_', $post->id) }}'));
+                controls.addEventListener("change", function (ev) {
+                    setThumbnail.disabled = false;
+                });
+
+                const loader = new GLTFLoader();
+                const url = ev.detail.preview_url;
+
+                let model = null;
+                loader.load(
+                    url,
+                    function (gltf) {
+                        model = gltf.scene;
+                        model.name = "structure";
+                        model.scale.set(400.0, 400.0, 400.0);
+                        model.position.set(0, 0, 0);
+                        scene.add(gltf.scene);
+                        onResize();
+                    },
+                    function (xhr) {
+                        console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+                    },
+                    function (error) {
+                        console.error(error);
+                    }
+                );
+
+                const light = new THREE.AmbientLight(0xFFFFFF, 5.0);
+                light.position.set(1, 1, 1);
+                scene.add(light);
+
+                tick();
+                function tick() {
+                    controls.update();
+                    renderer.render(scene, camera);
+                    requestAnimationFrame(tick);
+                }
+
+                window.addEventListener('resize', onResize);
+                function onResize() {
+                    width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
+                    height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
+
+                    renderer.setPixelRatio(window.devicePixelRatio);
+                    renderer.setSize(width, height);
+
+                    camera.aspect = width / height;
+                    camera.updateProjectionMatrix();
+                }
+            })
+        })();
+        
     </script>
 </div>
