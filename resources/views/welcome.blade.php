@@ -130,7 +130,7 @@
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
         <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
             @foreach ($posts as $post)
-                <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500">
+                <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500" onclick="openModal('datail_modal_{{ str_replace('-', '_', $post->id) }}', '{{ $post->id }}', '{{ $post->title }}')">
                     <figure class="md:h-[225px] h-[155px]"><img class="object-cover" src="{{ Storage::url($post->attachment->thumbnail) }}" alt="" /></figure>
                     <div class="card-body text-mydark font-yusei md:h-[90px] h-[60px] md:!pt-[12px] !pt-[5px] !gap-0">
                         <h2 class="card-title text-[16px] md:text-[24px] !mb-0 md:!mb-[10px] truncate">{{ $post->title }}</h2>
@@ -140,6 +140,12 @@
                         </div>
                     </div>
                 </div>
+                <dialog id="datail_modal_{{ str_replace('-', '_', $post->id) }}" class="modal">
+                    <x-datail :post="$post" />
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
             @endforeach
             <div class="card card-compact w-[450px] h-[210px] mb-5">
                 <button class="btn bg-mydark text-mywhite font-yusei hover:opacity-75 hover:bg-mydark width-[50%] mx-auto my-auto">もっと表示する</button>
