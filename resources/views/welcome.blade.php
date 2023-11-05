@@ -126,7 +126,7 @@
             </dialog>
         </div>
     </div>
-    <div id="new" class="mt-10">
+    <div id="contents" class="mt-10">
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
         <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
             @foreach ($posts as $post)
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <dialog id="datail_modal_{{ str_replace('-', '_', $post->id) }}" class="modal">
-                    <x-datail :post="$post" />
+                    <x-datail :post="$post" isModal="true" />
                     <form method="dialog" class="modal-backdrop">
                         <button>close</button>
                     </form>
