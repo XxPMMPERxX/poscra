@@ -5,7 +5,7 @@
                 <img id="preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
             @else
                 <div id="main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-[430px]">
-                    <canvas id="mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class=""></canvas>
+                    <canvas id="mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full rounded-lg"></canvas>
                 </div>
                 <script>
                     (() => {
