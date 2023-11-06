@@ -25,4 +25,8 @@ class Post extends Model
         return $this->hasOne(Attachment::class);
     }
 
+    public function favorites() {
+        return $this->hasMany(Favorite::class);
+    }
+
 }

@@ -25,5 +25,11 @@ Route::get('/auth/redirect', function () {
 })->name('google_auth');
 
 Route::get('/auth/callback', [GoogleAuthController::class, 'handleLogin']);
+Route::get('/logout', [GoogleAuthController::class, 'handleLogout']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
+Route::get('/post/{post_id}', function($post_id) {
+    $post = App\Models\Post::findOrFail($post_id);
+    return view('detail', ['post' => $post]);
+});

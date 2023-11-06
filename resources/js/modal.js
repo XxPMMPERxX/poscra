@@ -7,4 +7,5 @@ window.openModal = function(modalId, postId, postTitle = '') {
     modal.onclose = function(){
         history.back();
     }
+    window.dispatchEvent(new CustomEvent('show_modal', {detail: postId}));
 };
