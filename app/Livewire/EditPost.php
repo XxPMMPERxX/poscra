@@ -48,16 +48,13 @@ class EditPost extends Component
     }
 
     public function updatedAttachment() {
-        //logger($this->attachment->getClientOriginalExtension());
         if (!$this->attachment) {
             $this->attachment_type = null;
             return;
         }
 
-        //logger($this->attachment->getClientOriginalName());
         $fileName = $this->attachment->getClientOriginalName();
         $extenstion = File::extension($fileName);
-        //logger($extenstion);
 
         switch ($extenstion) {
             case 'png':
@@ -79,12 +76,9 @@ class EditPost extends Component
 
     public function updatedThumbnail(){
         logger($this->thumbnail->getClientOriginalName());
-        //$this->thumbnail->store('public');
     }
 
     public function updatedMcstructure(){
-        //$this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
-        //$this->reset(['mcstructure']);
     }
 
     public function updated($propertyName) {
@@ -128,13 +122,13 @@ class EditPost extends Component
                 $attachment->thumbnail = $this->thumbnail->store('public');
             }
 
-            if ($this->mcstructure !== null) {
+            /*if ($this->mcstructure !== null) {
                 $attachment->structure = $this->mcstructure->store('public');
             }
 
             if ($this->structure_name != $this->post->attachment->structure_name) {
-                $attachment->structure_name = $this->structure_name ?? 'mystructure:test_daaata' . time();
-            }
+                $attachment->structure_name = $this->structure_name ?? 'mystructure:poscra_autorename' . time();
+            }*/
             
             if ($this->attachment !== null) {
                 $attachment->attachment = $this->attachment_path ?? $this->attachment->store('public');

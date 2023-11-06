@@ -45,21 +45,28 @@
                     </div>
                     <input class="w-full bg-mywhite border-mydark input input-bordered" id="title" name="title" type="text" wire:model="title" maxlength="20" required/>
 
+                    <div class="flex flex-col font-yusei mt-3">
+                        <div>structure名</div>
+                        <input class="input input-bordered bg-mywhite" type="text" value="{{ $post->attachment->structure_name }}" readonly />
+                    </div>
                     <div class="flex items-end">
                         <label for="description" class="text-[] mt-3">説明</label>
                         @error('descrption')<span class="text-error">{{ $message }}</span>@enderror
                     </div>
+                    
                     <textarea class="textarea textarea-bordered w-full bg-mywhite border-mydark h-[90px]" id="description" name="description" maxlength="100" wire:model="description"></textarea>
-                    <div class="flex items-end">
-                        <label for="structure_{{ str_replace('-', '_', $post->id) }}" class="text-[] mt-3">mcstructure</label>
-                        <div class="tooltip" data-tip="*.mcstructureファイルはストラクチャーブロックによりエクスポートされたファイルです。 詳しい使い方の説明は省略します。">
-                            <i class="fa-solid fa-circle-question mx-2 mb-1"></i>
+                    {{-- 一旦更新時はMCSTRUCTUREはできないようにする
+                        <div class="flex items-end">
+                            <label for="structure_{{ str_replace('-', '_', $post->id) }}" class="text-[] mt-3">mcstructure</label>
+                            <div class="tooltip" data-tip="*.mcstructureファイルはストラクチャーブロックによりエクスポートされたファイルです。 詳しい使い方の説明は省略します。">
+                                <i class="fa-solid fa-circle-question mx-2 mb-1"></i>
+                            </div>
+                            @error('mcstructure_file_error')<span class="text-error">{{ $message }}</span>@enderror
                         </div>
-                        @error('mcstructure_file_error')<span class="text-error">{{ $message }}</span>@enderror
-                    </div>
-                    <input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure_{{ str_replace('-', '_', $post->id) }}" name="structure"  wire:model="mcstructure" accept=".mcstructure"/>
+                    　　　　　　　　<input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure_{{ str_replace('-', '_', $post->id) }}" name="structure"  wire:model="mcstructure" accept=".mcstructure"/>
+                    --}}
                     <button wire:click="remove" wire:confirm="削除すると投稿に紐付いたファイルも削除されます。よろしいですか？" class="btn bg-error text-mywhite w-full text-[15px] font-yusei hover:bg-error/80 md:mt-auto mt-[20px]"><i class="fa-regular fa-trash-can text-xl"></i>削除</button>
-                    <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-auto mt-[20px]"><i class="fa-solid fa-paper-plane"></i>更新</button>
+                    <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-[20px] mt-[20px]"><i class="fa-solid fa-paper-plane"></i>更新</button>
                 </div>
             </form>
         </div>

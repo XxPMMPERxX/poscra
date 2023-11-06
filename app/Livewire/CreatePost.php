@@ -9,6 +9,9 @@ use App\Models\Attachment;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Aternos\Nbt\Tag\Tag as NbtTag;
+use \Aternos\Nbt\IO\Reader\StringReader;
+use \Aternos\Nbt\NbtFormat;
 
 class CreatePost extends Component
 {
@@ -28,6 +31,7 @@ class CreatePost extends Component
         'title' => 'required|max:20',
         'description' => 'max:100',
         'mcstructure' => 'required|file',
+        'thumbnail' => 'required|file',
         'attachment'    => 'required|file',
     ];
 
@@ -37,14 +41,13 @@ class CreatePost extends Component
     }
 
     public function updatedAttachment() {
-        logger(get_class($this->attachment));
         //logger($this->attachment->getClientOriginalExtension());
         if (!$this->attachment) {
             $this->attachment_type = null;
             return;
         }
 
-        logger($this->attachment->getClientOriginalName());
+        //logger($this->attachment->getClientOriginalName());
         $fileName = $this->attachment->getClientOriginalName();
         $extenstion = File::extension($fileName);
         //logger($extenstion);
@@ -69,14 +72,8 @@ class CreatePost extends Component
         }
     }
 
-    public function updatedThumbnail(){
-        logger($this->thumbnail->getClientOriginalName());
-        //$this->thumbnail->store('public');
-    }
-
     public function updatedMcstructure(){
-        //$this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
-        //$this->reset(['mcstructure']);
+        $this->validateMcstructure();
     }
 
     public function updated($propertyName) {
@@ -103,10 +100,11 @@ class CreatePost extends Component
     }
 
     public function save(){
-        //
-        logger('save');
+        
         $this->validate();
-        logger('clear validation');
+        if (!$this->validateMcstructure()) {
+            return;
+        }
 
         DB::transaction(function () {
             $post = new Post();
@@ -130,6 +128,43 @@ class CreatePost extends Component
             return redirect('/dashboard');
         });
         
+    }
+
+    public function validateMcstructure() {
+        $mcstructure = File::get($this->mcstructure->getRealPath());
+        $mcstructure = @NbtTag::load(new StringReader($mcstructure, NbtFormat::BEDROCK_EDITION));
+        if (!$mcstructure) {
+            $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
+            $this->reset(['mcstructure']);
+            return false;
+        }
+
+        $block_position_datas = $mcstructure
+            ->getCompound('structure')
+            ?->getCompound('palette')
+            ?->getCompound('default')
+            ?->getCompound('block_position_data');
+
+        if (!$block_position_datas) {
+            $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
+            $this->reset(['mcstructure']);
+            return false;
+        }
+
+        $structure_name = '';
+        foreach ($block_position_datas as $block_position_data){
+            if (isset($block_position_data['block_entity_data']['structureName'])) {
+                $structure_name = $block_position_data['block_entity_data']['structureName']->getValue();
+                break;
+            }
+        }
+        if (!$structure_name) {
+            $this->addError('mcstructure_file_error', 'structureNameが読み取れませんでした。');
+            $this->reset(['mcstructure']);
+            return false;
+        }
+        $this->structure_name = $structure_name;
+        return true;
     }
 
 }

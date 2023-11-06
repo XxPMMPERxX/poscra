@@ -25,7 +25,7 @@ Route::get('/auth/redirect', function () {
 })->name('google_auth');
 
 Route::get('/auth/callback', [GoogleAuthController::class, 'handleLogin']);
-Route::get('/logout', [GoogleAuthController::class, 'handleLogout']);
+Route::post('/logout', [GoogleAuthController::class, 'handleLogout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 

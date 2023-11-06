@@ -4,8 +4,53 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c04063101b39a39fd47dbe25a7690893",
+    "content-hash": "9340afcacc39a75d41cc84ec5f848dec",
     "packages": [
+        {
+            "name": "aternos/nbt",
+            "version": "v1.9.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aternosorg/php-nbt.git",
+                "reference": "c6b0d1497d899985fc6cc3cd831e45c6b47f98f8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aternosorg/php-nbt/zipball/c6b0d1497d899985fc6cc3cd831e45c6b47f98f8",
+                "reference": "c6b0d1497d899985fc6cc3cd831e45c6b47f98f8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "ext-mbstring": "*",
+                "ext-zlib": "*",
+                "php": ">=8.0",
+                "php-64bit": "*",
+                "pocketmine/binaryutils": "^0.2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Aternos\\Nbt\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kurt Thiemann",
+                    "email": "kurt@aternos.org"
+                }
+            ],
+            "description": "PHP library to parse, modify, and create NBT objects",
+            "support": {
+                "issues": "https://github.com/aternosorg/php-nbt/issues",
+                "source": "https://github.com/aternosorg/php-nbt/tree/v1.9.0"
+            },
+            "time": "2023-05-04T17:55:22+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.11.0",
@@ -2607,6 +2652,48 @@
                 }
             ],
             "time": "2023-02-25T19:38:58+00:00"
+        },
+        {
+            "name": "pocketmine/binaryutils",
+            "version": "0.2.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pmmp/BinaryUtils.git",
+                "reference": "5ac7eea91afbad8dc498f5ce34ce6297d5e6ea9a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pmmp/BinaryUtils/zipball/5ac7eea91afbad8dc498f5ce34ce6297d5e6ea9a",
+                "reference": "5ac7eea91afbad8dc498f5ce34ce6297d5e6ea9a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0",
+                "php-64bit": "*"
+            },
+            "require-dev": {
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "1.3.0",
+                "phpstan/phpstan-phpunit": "^1.0",
+                "phpstan/phpstan-strict-rules": "^1.0.0",
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "pocketmine\\utils\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL-3.0"
+            ],
+            "description": "Classes and methods for conveniently handling binary data",
+            "support": {
+                "issues": "https://github.com/pmmp/BinaryUtils/issues",
+                "source": "https://github.com/pmmp/BinaryUtils/tree/0.2.4"
+            },
+            "time": "2022-01-12T18:06:33+00:00"
         },
         {
             "name": "psr/clock",
@@ -8292,5 +8379,5 @@
         "php": "^8.1"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }
