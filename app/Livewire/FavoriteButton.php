@@ -21,7 +21,10 @@ class FavoriteButton extends Component {
     }
 
     public function onClick() {
-        if ($this->isFavorite) {
+        if (Favorite::where('user_id', auth()->user()->id)
+            ->where('post_id', $this->post_id)
+            ->exists()
+        ) {
             Favorite::where('user_id', auth()->user()->id)
                         ->where('post_id', $this->post_id)
                         ->delete();
