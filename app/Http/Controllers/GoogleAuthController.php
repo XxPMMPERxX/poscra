@@ -31,4 +31,12 @@ class GoogleAuthController extends Controller {
 
         return redirect('/dashboard');
     }
+
+    public function handleLogout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect('/');
+    }
 }

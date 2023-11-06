@@ -41,7 +41,7 @@
                             <ul class="p-2 shadow menu dropdown-content z-[1] bg-mywhite rounded-box w-52">
                                 <li><a href="{{ url('/dashboard') }}">ダッシュボード</a></li>
                                 <li><a>設定</a></li>
-                                <li class="text-[#e66c51]"><a>ログアウト</a></li>
+                                <li class="text-[#e66c51]"><a href="/logout">ログアウト</a></li>
                             </ul>
                         </details>
                     @else

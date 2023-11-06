@@ -108,7 +108,7 @@
                 <textarea class="textarea textarea-bordered bg-mywhite" readonly>{{ $post->description }}</textarea>
             </div>
             <button type="button" class="btn bg-mydark text-mywhite font-yusei hover:mydark/80 mb-[10px]">ダウンロード</button>
-            <livewire:favorite-button :post_id="$post->id" />
+            @auth <livewire:favorite-button :post_id="$post->id" /> @endauth
         </div>
     </form>
 </div>
