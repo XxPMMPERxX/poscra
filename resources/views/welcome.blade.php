@@ -70,7 +70,7 @@
                 </dialog>
             @endforeach
             <div class="card card-compact w-[450px] h-[210px] mb-5">
-                <button class="btn bg-mydark text-mywhite font-yusei hover:opacity-75 hover:bg-mydark width-[50%] mx-auto my-auto">もっと表示する</button>
+                <!--<button class="btn bg-mydark text-mywhite font-yusei hover:opacity-75 hover:bg-mydark width-[50%] mx-auto my-auto">もっと表示する</button>-->
             </div>
         </div>
     </div>
