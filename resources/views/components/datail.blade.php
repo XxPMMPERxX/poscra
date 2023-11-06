@@ -2,24 +2,24 @@
     <form class="flex flex-col md:flex-row md:py-5 md:px-10 md:gap-[24px] gap-[10px]">
         <div class="md:w-3/5 w-full relative group">
             @if ($post->attachment->attachment_type == 'image')
-                <img id="preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
+                <img id="detail_preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
             @else
-                <div id="main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-[430px]">
-                    <canvas id="mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full rounded-lg"></canvas>
+                <div id="detail_main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-[430px]">
+                    <canvas id="detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full rounded-lg"></canvas>
                 </div>
                 <script>
                     (() => {
                         window.addEventListener('show_modal', (ev) => {
                             if (ev.detail !== "{{ $post->id }}") return;
-                            const canvas = document.getElementById("mcstructure_preview_{{ str_replace('-', '_', $post->id) }}");
+                            const canvas = document.getElementById("detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}");
                     
                             const renderer = new THREE.WebGLRenderer({
                                 canvas: canvas,
                                 antialias: true,
                                 preserveDrawingBuffer: true,
                             });
-                            let width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
-                            let height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
+                            let width = document.getElementById("detail_main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
+                            let height = document.getElementById("detail_main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
                             console.log(width,height);
                 
                             renderer.setPixelRatio(1);
@@ -30,7 +30,7 @@
                             const camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
                             camera.position.set(0, -5000, -20000);
                 
-                            const controls = new OrbitControls(camera, document.getElementById('main_canvas_{{ str_replace('-', '_', $post->id) }}'));
+                            const controls = new OrbitControls(camera, document.getElementById('detail_main_canvas_{{ str_replace('-', '_', $post->id) }}'));
                 
                             const loader = new GLTFLoader();
                             const url = "{{ Storage::url($post->attachment->attachment) }}";
@@ -67,8 +67,8 @@
                 
                             window.addEventListener('resize', onResize);
                             function onResize() {
-                                width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
-                                height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
+                                width = document.getElementById("detail_main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
+                                height = document.getElementById("detail_main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
                 
                                 renderer.setPixelRatio(window.devicePixelRatio);
                                 renderer.setSize(width, height);
