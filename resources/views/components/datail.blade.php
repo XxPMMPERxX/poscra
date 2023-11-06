@@ -88,21 +88,27 @@
             @endif
         </div>
         <div class="flex flex-col font-yusei text-mydark md:w-2/5 w-full">
-            <div class="flex items-end font-yusei text-[24px] mb-[19px]">
+            <div class="flex items-end font-yusei text-[24px] mb-[15px]">
                 {{ $post->title }}
             </div>
-            <div class="flex font-yusei border-b-[1px] justify-between mb-[13px]">
+            <div class="flex font-yusei border-b-[1px] justify-between mb-[10px]">
                 <div>投稿日:</div>
                 <div>{{ $post->created_at->format('Y/m/d') }}</div>
             </div>
-            <div class="flex font-yusei border-b-[1px] justify-between mb-[13px]">
+            <div class="flex font-yusei border-b-[1px] justify-between mb-[10px]">
                 <div>クリエイター:</div>
                 <div>{{ $post->user->name }}</div>
             </div>
-            <div class="flex flex-col font-yusei mb-[13px]">
+            <div class="flex flex-col font-yusei mb-[10px]">
                 <div>structure名</div>
                 <input class="input input-bordered bg-mywhite" type="text" value="{{ $post->attachment->structure_name }}" readonly />
             </div>
+            <div class="flex flex-col font-yusei mb-[13px]">
+                <div>説明</div>
+                <textarea class="textarea textarea-bordered bg-mywhite" readonly>{{ $post->description }}</textarea>
+            </div>
+            <button type="button" class="btn bg-mydark text-mywhite font-yusei hover:mydark/80 mb-[10px]">ダウンロード</button>
+            <livewire:favorite-button :post_id="$post->id" />
         </div>
     </form>
 </div>
