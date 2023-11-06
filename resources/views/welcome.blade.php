@@ -14,59 +14,18 @@
             <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/heart_new.png') }}" />
         </div>
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
-            <!-- Open the modal using ID.showModal() method -->
-            <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
-                <div class="absolute text-mydark font-yusei sm:text-[14px] bg-myaccent sm:w-[34px] sm:h-[26px] text-center sm:leading-[26px] rounded-tl-[20px] text-[10px] w-[25px] h-[18px] leading-[18px]">1位</div>
-                <img onclick="openModal('my_modal_1', 'test123123', 'test')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_1" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
+            @foreach($trend_posts as $trend_post)
+                <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
+                    <div class="absolute text-mydark font-yusei sm:text-[14px] bg-myaccent sm:w-[34px] sm:h-[26px] text-center sm:leading-[26px] rounded-tl-[20px] text-[10px] w-[25px] h-[18px] leading-[18px]">{{ $loop->index + 1 }}位</div>
+                    <img onclick="openModal('trend_post_modal_{{ str_replace('-', '_', $trend_post->id) }}', '{{ $trend_post->id }}', '{{ $trend_post->title }}')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Storage::url($trend_post->attachment->thumbnail) }}" />
                 </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-            <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
-                <div class="absolute text-mydark font-yusei sm:text-[14px] bg-myaccent sm:w-[34px] sm:h-[26px] text-center sm:leading-[26px] rounded-tl-[20px] text-[10px] w-[25px] h-[18px] leading-[18px]">2位</div>
-                <img onclick="openModal('my_modal_2', 'test1231233', 'test2')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_2" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
-                </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-            <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
-                <div class="absolute text-mydark font-yusei sm:text-[14px] bg-myaccent sm:w-[34px] sm:h-[26px] text-center sm:leading-[26px] rounded-tl-[20px] text-[10px] w-[25px] h-[18px] leading-[18px]">3位</div>
-                <img onclick="openModal('my_modal_3', 'test1231233', 'test3')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/test.png') }}" />
-            </div>
-            <dialog id="my_modal_3" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
-                </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-            <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
-                <div class="absolute text-mydark font-yusei sm:text-[14px] bg-myaccent sm:w-[34px] sm:h-[26px] text-center sm:leading-[26px] rounded-tl-[20px] text-[10px] w-[25px] h-[18px] leading-[18px]">4位</div>
-                <img onclick="openModal('my_modal_4', 'test12312334', 'test4')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_4" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
-                </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
+                <dialog id="trend_post_modal_{{ str_replace('-', '_', $trend_post->id) }}" class="modal">
+                    <x-datail :post="$trend_post" isModal="true" />
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
+            @endforeach
         </div>
     </div>
     <div id="new" class="mt-5">
@@ -76,54 +35,17 @@
             <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/new_offer_symbol.png') }}" />
         </div>
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
-            <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
-                <img onclick="openModal('my_modal_10', 'test123123', 'test')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_10" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
+            @foreach($new_posts as $new_post)
+                <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
+                    <img onclick="openModal('new_post_modal_{{ str_replace('-', '_', $new_post->id) }}', '{{ $new_post->id }}', '{{ $new_post->title }}')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Storage::url($new_post->attachment->thumbnail) }}" />
                 </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-            <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
-                <img onclick="openModal('my_modal_2', 'test1231233', 'test2')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_2" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
-                </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-            <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
-                <img onclick="openModal('my_modal_3', 'test1231233', 'test3')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_3" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
-                </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
-            <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
-                <img onclick="openModal('my_modal_4', 'test12312334', 'test4')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Vite::asset('resources/images/default_thumbnail.png') }}" />
-            </div>
-            <dialog id="my_modal_4" class="modal">
-                <div class="modal-box max-w-none" style="max-width: 1190px;height: 585px;">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Press ESC key or click outside to close</p>
-                </div>
-                <form method="dialog" class="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
+                <dialog id="new_post_modal_{{ str_replace('-', '_', $new_post->id) }}" class="modal">
+                    <x-datail :post="$new_post" isModal="true" />
+                    <form method="dialog" class="modal-backdrop">
+                        <button>close</button>
+                    </form>
+                </dialog>
+            @endforeach
         </div>
     </div>
     <div id="contents" class="mt-10">

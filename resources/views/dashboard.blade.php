@@ -5,7 +5,6 @@
             お気に入りの投稿一覧
         </div>
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
-
             @foreach(auth()->user()->favorites()->get() as $favorite)
                 <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
                     <img onclick="openModal('datail_modal_{{ str_replace('-', '_', $favorite->post()->first()->id) }}', '{{ $favorite->post()->first()->id }}', '{{ $favorite->post()->first()->title }}')" class="sm:w-[330px] sm:h-[185px] rounded-[20px] w-[178px] h-[100px]" src="{{ Storage::url($favorite->post()->first()->attachment->thumbnail) }}" />
