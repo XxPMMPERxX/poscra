@@ -34,6 +34,7 @@ class CreatePost extends Component
         'mcstructure' => 'required|file',
         'thumbnail' => 'required|file',
         'attachment'    => 'required|file',
+        'structure_name' => 'unique:attachment'
     ];
 
     public function render()

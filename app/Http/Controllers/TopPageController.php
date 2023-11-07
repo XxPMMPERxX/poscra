@@ -16,7 +16,7 @@ class TopPageController extends Controller {
                         ->select(DB::raw('count(*) as favorites_count, post_id'))
                         ->whereDate('created_at', '>=', Carbon::today()->subDay(7)) // 一週間で集計
                         ->groupBy('post_id')
-                        ->orderBy('favorites_count')
+                        ->orderBy('favorites_count', 'desc')
                         ->limit(4)
                         ->get()
                         ->map(function($item, $key){

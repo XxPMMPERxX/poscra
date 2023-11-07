@@ -54,9 +54,13 @@
                             <i class="fa-solid fa-circle-question mx-2 mb-1"></i>
                         </div>
                         @error('mcstructure_file_error')<span class="text-error">{{ $message }}</span>@enderror
+                        @error('mcstructure')<span class="text-error">{{ $message }}</span>@enderror
+                        @error('structure_name')<span class="text-error">すでに使われているストラクチャ名です。エクスポートする際に他のストラクチャーと被らないような名前にしてください。</span>@enderror
                     </div>
                     <input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure" name="structure"  wire:model="mcstructure" accept=".mcstructure" required/>
 
+                    @error('thumbnail')<span class="text-error">{{ $message }}</span>@enderror
+                    @error('attachment')<span class="text-error">{{ $message }}</span>@enderror
                     <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-auto mt-[20px]"><i class="fa-solid fa-paper-plane"></i>投稿</button>
                 </div>
             </form>
