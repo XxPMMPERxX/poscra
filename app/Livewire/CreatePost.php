@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Aternos\Nbt\Tag\Tag as NbtTag;
 use \Aternos\Nbt\IO\Reader\StringReader;
 use \Aternos\Nbt\NbtFormat;
+use Exception;
 
 class CreatePost extends Component
 {
@@ -132,7 +133,15 @@ class CreatePost extends Component
 
     public function validateMcstructure() {
         $mcstructure = File::get($this->mcstructure->getRealPath());
-        $mcstructure = @NbtTag::load(new StringReader($mcstructure, NbtFormat::BEDROCK_EDITION));
+        try {
+            $mcstructure = @NbtTag::load(new StringReader($mcstructure, NbtFormat::BEDROCK_EDITION));
+        } catch (Exception $exception) {
+            logger(json_encode($exception));
+            $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
+            $this->reset(['mcstructure']);
+            return false;
+        }
+        
         if (!$mcstructure) {
             $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
             $this->reset(['mcstructure']);

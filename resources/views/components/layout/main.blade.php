@@ -31,7 +31,7 @@
                 <div class="font-cpfont text-4xl ml-9 text-myaccent">
                     <a href="{{ url('/') }}">ポスクラ</a>
                 </div>
-                <div class="sm:top-0 sm:right-0 pr-7 mr-7 h-11 leading-10 my-10 text-mydark font-yusei">
+                <div class="sm:top-0 sm:right-0 pr-7 mr-5 h-11 leading-10 my-10 text-mydark font-yusei">
                     @auth
                         <details class="dropdown dropdown-end">
                             <summary class="flex items-center cursor-pointer">
@@ -50,7 +50,7 @@
                             </ul>
                         </details>
                     @else
-                        <button class="btn font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 flex items-center" onclick="login_modal.show()">
+                        <button class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 flex items-center !px-0" onclick="login_modal.show()">
                             <img class="mx-2" src="{{ Vite::asset('resources/images/accessibility_glyph_color.png') }}" />
                             ログイン / 登録
                         </button>
