@@ -33,7 +33,7 @@
                     <div id="main_canvas" class="relative w-full h-[220px] md:h-[430px] @if($attachment_type !== '3dmodel') hidden @endif">
                         <canvas id="mcstructure_preview" class="" wire:ignore.self></canvas>
                     </div>
-                    <input id="dropzone-file" type="file" class="absolute h-[1px] w-[1px] opacity-0 top-[50%] left-[50%]" accept=".png,.jpeg,.jpg,.glb" wire:model="attachment" name="attachment" required/>
+                    <input id="dropzone-file" type="file" class="absolute h-[1px] w-[1px] opacity-0 top-[50%] left-[50%]" accept=".png,.jpeg,.jpg,.glb,model/gltf-binary" wire:model="attachment" name="attachment" required/>
                     <input id="thumbnail_image" type="file" name="thumbnail_image" wire:model="thumbnail" class="hidden" />
                 </div>
                 <div class="flex flex-col font-yusei text-mydark md:w-2/5 w-full">

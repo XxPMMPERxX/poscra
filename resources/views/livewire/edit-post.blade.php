@@ -35,7 +35,7 @@
                     <div id="main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-[430px] @if($attachment_type !== '3dmodel') hidden @endif">
                         <canvas id="mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="" wire:ignore.self></canvas>
                     </div>
-                    <input id="dropzone-file_{{ str_replace('-', '_', $post->id) }}" type="file" class="absolute h-[1px] w-[1px] opacity-0 top-[50%] left-[50%]" accept=".png,.jpeg,.jpg,.glb" wire:model="attachment" name="attachment" />
+                    <input id="dropzone-file_{{ str_replace('-', '_', $post->id) }}" type="file" class="absolute h-[1px] w-[1px] opacity-0 top-[50%] left-[50%]" accept=".png,.jpeg,.jpg,.glb,model/gltf-binary" wire:model="attachment" name="attachment" />
                     <input id="thumbnail_image_{{ str_replace('-', '_', $post->id) }}" type="file" name="thumbnail_image" wire:model="thumbnail" class="hidden" />
                 </div>
                 <div class="flex flex-col font-yusei text-mydark md:w-2/5 w-full">
