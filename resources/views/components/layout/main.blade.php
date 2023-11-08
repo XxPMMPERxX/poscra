@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" prefix="og: http://ogp.me/ns#">
     <head>
         <!-- Google Tag Manager -->
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -12,11 +12,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@gollilla_" />
-        <meta name="twitter:creator" content="@gollilla_" />
+        <meta name="twitter:domain" content="https://twitter.com/gollilla_" />
+
         <meta property="og:url" content="{{ Request::url() }}" />
         <meta property="og:title" content="ポスクラ | {{ $title ?? '' }}" />
+        <meta property="og:type" content="website" />
         <meta property="og:description" content="{{ $description ?? 'オリジナルの建築を投稿! 気に入った建築を自分の世界へ!' }}" />
         <meta property="og:image" content="{{ $eyecatch ?? Vite::asset('resources/images/eyecatch.png') }}" />
 
