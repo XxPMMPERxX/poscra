@@ -40,7 +40,7 @@
                 </div>
                 <div class="flex flex-col font-yusei text-mydark md:w-2/5 w-full">
                     <div class="flex items-end">
-                        <label for="title" class="text-[] mt-5">タイトル</label>
+                        <label for="title" class="text-[]">タイトル</label>
                         @error('title')<span class="text-error">{{ $message }}</span>@enderror
                     </div>
                     <input class="w-full bg-mywhite border-mydark input input-bordered" id="title" name="title" type="text" wire:model="title" maxlength="20" required/>
@@ -70,6 +70,7 @@
                     @error('attachment_file_error')<span class="text-error">{{ $message }}</span>@enderror
                     <button wire:click="remove" wire:confirm="削除すると投稿に紐付いたファイルも削除されます。よろしいですか？" class="btn bg-error text-mywhite w-full text-[15px] font-yusei hover:bg-error/80 md:mt-auto mt-[20px]"><i class="fa-regular fa-trash-can text-xl"></i>削除</button>
                     <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-[20px] mt-[20px]"><i class="fa-solid fa-paper-plane"></i>更新</button>
+                    <a href="/post/{{ $post->id }}" class="text-[14px] text-right mt-2" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> 投稿ページへ移動する</a>
                 </div>
             </form>
         </div>
