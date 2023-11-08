@@ -12,7 +12,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>ポスクラ | {{ $title ?: '' }}</title>
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@gollilla_" />
+        <meta name="twitter:creator" content="@gollilla_" />
+        <meta property="og:url" content="{{ Request::url() }}" />
+        <meta property="og:title" content="ポスクラ | {{ $title ?? '' }}" />
+        <meta property="og:description" content="{{ $description ?? 'オリジナルの建築を投稿! 気に入った建築を自分の世界へ!' }}" />
+        <meta property="og:image" content="{{ $eyecatch ?? Vite::asset('/resources/images/eyecatch.png') }}" />
+
+        <title>ポスクラ | {{ $title ?? '' }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
