@@ -30,8 +30,8 @@ class EditPost extends Component
     protected $rules = [
         'title' => 'required|max:20',
         'description' => 'max:100',
-        'thumbnail' => 'file|max:5120',
-        'attachment'    => 'file|max:5120',
+        'thumbnail' => 'file|nullable|max:5120',
+        'attachment'    => 'file|nullable|max:5120',
     ];
 
     public function render()
