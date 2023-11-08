@@ -33,7 +33,7 @@
                     <div id="main_canvas" class="relative w-full h-[220px] md:h-[430px] @if($attachment_type !== '3dmodel') hidden @endif">
                         <canvas id="mcstructure_preview" class="" wire:ignore.self></canvas>
                     </div>
-                    <input id="dropzone-file" type="file" class="absolute h-[1px] w-[1px] opacity-0 top-[50%] left-[50%]" wire:model="attachment" name="attachment" required/>
+                    <input id="dropzone-file" type="file" class="absolute h-[1px] w-[1px] opacity-0 top-[50%] left-[50%]" accept=".png,.jpeg,.jpg,.glb" wire:model="attachment" name="attachment" required/>
                     <input id="thumbnail_image" type="file" name="thumbnail_image" wire:model="thumbnail" class="hidden" />
                 </div>
                 <div class="flex flex-col font-yusei text-mydark md:w-2/5 w-full">
@@ -55,12 +55,12 @@
                         </div>
                         @error('mcstructure_file_error')<span class="text-error">{{ $message }}</span>@enderror
                         @error('mcstructure')<span class="text-error">{{ $message }}</span>@enderror
-                        @error('structure_name')<span class="text-error">すでに使われているストラクチャ名です。エクスポートする際に他のストラクチャーと被らないような名前にしてください。</span>@enderror
                     </div>
                     <input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure" name="structure"  wire:model="mcstructure" accept=".mcstructure" required/>
 
                     @error('thumbnail')<span class="text-error">{{ $message }}</span>@enderror
                     @error('attachment')<span class="text-error">{{ $message }}</span>@enderror
+                    @error('attachment_file_error')<span class="text-error">{{ $message }}</span>@enderror
                     <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-auto mt-[20px]"><i class="fa-solid fa-paper-plane"></i>投稿</button>
                 </div>
             </form>

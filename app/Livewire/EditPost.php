@@ -30,6 +30,8 @@ class EditPost extends Component
     protected $rules = [
         'title' => 'required|max:20',
         'description' => 'max:100',
+        'thumbnail' => 'file|max:5120',
+        'attachment'    => 'file|max:5120',
     ];
 
     public function render()
@@ -68,8 +70,10 @@ class EditPost extends Component
 
                 $this->attachment_path = $this->attachment->store('public');
                 $this->dispatch('update_preview_' . str_replace('-', '_', $this->post->id), preview_url: Storage::url($this->attachment_path));
+                break;
             default:
                 $this->addError('attachment_file_error', 'ファイル形式が不正です');
+                $this->reset(['attachment']);
         }
         $this->isAttachmentChanged = true;
     }

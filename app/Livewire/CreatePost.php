@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Aternos\Nbt\Tag\Tag as NbtTag;
-use \Aternos\Nbt\IO\Reader\StringReader;
-use \Aternos\Nbt\NbtFormat;
+use Aternos\Nbt\IO\Reader\StringReader;
+use Aternos\Nbt\NbtFormat;
+use Hashids\Hashids;
 use Exception;
 
 class CreatePost extends Component
@@ -25,16 +26,15 @@ class CreatePost extends Component
     public $attachment_type; // [image] or [3dmodel]
     public $thumbnail;       // 3dデータを画像化もしくは画像そのまま
 
-    public $structure_name; // mcstructure の structureName
+    //public $structure_name; // mcstructure の structureName
     public $attachment_path; // 3dmodelのパス（プレビュー用）
 
     protected $rules = [
         'title' => 'required|max:20',
         'description' => 'max:100',
-        'mcstructure' => 'required|file',
-        'thumbnail' => 'required|file',
-        'attachment'    => 'required|file',
-        'structure_name' => 'unique:attachment'
+        'mcstructure' => 'required|file|max:10',
+        'thumbnail' => 'required|file|max:5120',
+        'attachment'    => 'required|file|max:5120',
     ];
 
     public function render()
@@ -43,16 +43,13 @@ class CreatePost extends Component
     }
 
     public function updatedAttachment() {
-        //logger($this->attachment->getClientOriginalExtension());
         if (!$this->attachment) {
             $this->attachment_type = null;
             return;
         }
 
-        //logger($this->attachment->getClientOriginalName());
         $fileName = $this->attachment->getClientOriginalName();
         $extenstion = File::extension($fileName);
-        //logger($extenstion);
 
         switch ($extenstion) {
             case 'png':
@@ -69,8 +66,10 @@ class CreatePost extends Component
                 }
                 $this->attachment_path = $this->attachment->store('public');
                 $this->dispatch('update_preview', preview_url: Storage::url($this->attachment_path));
+                break;
             default:
-                $this->addError('attachment_file_error', 'ファイル形式が不正です');
+                $this->addError('attachment_file_error', 'サムネイルのファイル形式が不正です');
+                $this->reset(['attachment']);
         }
     }
 
@@ -119,7 +118,12 @@ class CreatePost extends Component
             $attachment->post_id = $post->id;
             $attachment->thumbnail = $this->thumbnail->store('public');
             $attachment->structure = $this->mcstructure->store('public');
-            $attachment->structure_name = $this->structure_name ?? 'mystructure:test_daaata' . time();
+
+            $hashid = new Hashids($post->id, 8);
+            $hashid = $hashid->encode(time());
+            $structure_name = "mystructure:poscra_" . $hashid;
+            $attachment->structure_name = $structure_name;
+
             $attachment->attachment = $this->attachment_path ?? $this->attachment->store('public');
             $attachment->attachment_type = $this->attachment_type;
             $attachment->save();
@@ -139,17 +143,15 @@ class CreatePost extends Component
         } catch (Exception $exception) {
             logger(json_encode($exception));
             $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
-            $this->reset(['mcstructure']);
             return false;
         }
         
         if (!$mcstructure) {
             $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
-            $this->reset(['mcstructure']);
             return false;
         }
 
-        $block_position_datas = $mcstructure
+        /*$block_position_datas = $mcstructure
             ->getCompound('structure')
             ?->getCompound('palette')
             ?->getCompound('default')
@@ -157,7 +159,6 @@ class CreatePost extends Component
 
         if (!$block_position_datas) {
             $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
-            $this->reset(['mcstructure']);
             return false;
         }
 
@@ -170,10 +171,13 @@ class CreatePost extends Component
         }
         if (!$structure_name) {
             $this->addError('mcstructure_file_error', 'structureNameが読み取れませんでした。');
-            $this->reset(['mcstructure']);
             return false;
         }
-        $this->structure_name = $structure_name;
+        $structure_name = explode(":", $structure_name);
+        if (count($structure_name) !== 2) {
+            $this->addError('mcstructure_file_error', 'structureNameが不正です。');
+            return false;
+        }*/
         return true;
     }
 

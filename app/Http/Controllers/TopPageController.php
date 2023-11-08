@@ -7,6 +7,7 @@ use App\Models\Attachment;
 use App\Models\Favorite;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Services\PostModalProvider;
 
 class TopPageController extends Controller {
 
@@ -23,13 +24,16 @@ class TopPageController extends Controller {
                             return Post::find($item->post_id);
                         });
         $new_posts = Post::orderBy('created_at', 'desc')->limit(4)->get();
+        $modal_provider = new PostModalProvider('detail_');
+        $modal_provider->registerBulk($posts);
 
         return view(
             'welcome', 
             [
                 'posts' => $posts,
                 'trend_posts' => $trend_posts,
-                'new_posts' => $new_posts
+                'new_posts' => $new_posts,
+                'modal_provider' => $modal_provider,
             ]
         );
     }

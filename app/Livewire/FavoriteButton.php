@@ -14,9 +14,11 @@ class FavoriteButton extends Component {
 
     public function mount($post_id) {
         $this->post_id = $post_id;
-        $this->isFavorite = Favorite::where('user_id', auth()->user()->id)
-                        ->where('post_id', $post_id)
-                        ->exists();
+        $this->isFavorite = auth()->check() ? 
+                                Favorite::where('user_id', auth()->user()->id)
+                                    ->where('post_id', $post_id)
+                                    ->exists() :
+                                false;
         $this->favoriteCount = Favorite::where('post_id', $post_id)->count();
     }
 

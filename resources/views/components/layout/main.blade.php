@@ -40,7 +40,9 @@
                             </summary>
                             <ul class="p-2 shadow menu dropdown-content z-[1] bg-mywhite rounded-box w-52">
                                 <li><a href="{{ url('/dashboard') }}">ダッシュボード</a></li>
-                                <li><a>設定</a></li>
+                                <li>
+                                    <a onclick="setting.show();">設定</a>
+                                </li>
                                 <li class="text-[#e66c51]" onclick="document.logout.submit()">
                                     <form name="logout" action="{{ route('logout') }}" method="post">
                                         @csrf
@@ -49,6 +51,14 @@
                                 </li>
                             </ul>
                         </details>
+                        <dialog id="setting" class="modal">
+                            <div class="modal-box max-w-[400px] bg-mywhite">
+                                <livewire:setting />
+                            </div>
+                            <form method="dialog" class="modal-backdrop bg-mydark/40">
+                                <button>close</button>
+                            </form>
+                        </dialog>
                     @else
                         <button class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 flex items-center !px-0" onclick="login_modal.show()">
                             <img class="mx-2" src="{{ Vite::asset('resources/images/accessibility_glyph_color.png') }}" />
