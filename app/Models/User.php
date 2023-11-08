@@ -3,14 +3,20 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Ramsey\Uuid\Uuid;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory,HasUuids,Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -20,7 +26,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
-        'password',
+        'google_id',
+        'google_token',
+        'google_refresh_token',
+        'email_verified_at'
     ];
 
     /**
@@ -29,8 +38,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        ''
     ];
 
     /**
@@ -40,6 +48,22 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
     ];
+
+    public function newUniqueId(): string
+    {
+        return (string) Uuid::uuid4();
+    }
+
+    public function posts(): HasMany {
+        return $this->hasMany(Post::class);
+    }
+
+    public function attachment(): HasOne {
+        return $this->hasOne(Attachment::class);
+    }
+
+    public function favorites(): HasMany {
+        return $this->hasMany(Favorite::class);
+    }
 }
