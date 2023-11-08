@@ -18,7 +18,7 @@
         <meta property="og:url" content="{{ Request::url() }}" />
         <meta property="og:title" content="ポスクラ | {{ $title ?? '' }}" />
         <meta property="og:description" content="{{ $description ?? 'オリジナルの建築を投稿! 気に入った建築を自分の世界へ!' }}" />
-        <meta property="og:image" content="{{ $eyecatch ?? Vite::asset('/resources/images/eyecatch.png') }}" />
+        <meta property="og:image" content="{{ $eyecatch ?? Vite::asset('resources/images/eyecatch.png') }}" />
 
         <title>ポスクラ | {{ $title ?? '' }}</title>
 
