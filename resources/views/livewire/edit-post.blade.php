@@ -63,13 +63,13 @@
                             </div>
                             @error('mcstructure_file_error')<span class="text-error">{{ $message }}</span>@enderror
                         </div>
-                    　　　　　　　　<input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure_{{ str_replace('-', '_', $post->id) }}" name="structure"  wire:model="mcstructure" accept=".mcstructure"/>
+                        <input type="file" class="file-input file-input-bordered w-full bg-mywhite input-mydark" id="structure_{{ str_replace('-', '_', $post->id) }}" name="structure"  wire:model="mcstructure" accept=".mcstructure"/>
                     --}}
                     @error('thumbnail')<span class="text-error">{{ $message }}</span>@enderror
                     @error('attachment')<span class="text-error">{{ $message }}</span>@enderror
                     @error('attachment_file_error')<span class="text-error">{{ $message }}</span>@enderror
-                    <button wire:click="remove" wire:confirm="削除すると投稿に紐付いたファイルも削除されます。よろしいですか？" class="btn bg-error text-mywhite w-full text-[15px] font-yusei hover:bg-error/80 md:mt-auto mt-[20px]"><i class="fa-regular fa-trash-can text-xl"></i>削除</button>
-                    <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 md:mt-[20px] mt-[20px]"><i class="fa-solid fa-paper-plane"></i>更新</button>
+                    <button wire:click="remove" wire:confirm="削除すると投稿に紐付いたファイルも削除されます。よろしいですか？" class="btn bg-error border-error text-mywhite w-full text-[15px] font-yusei hover:bg-error/80 md:mt-auto mt-[10px]"><i class="fa-regular fa-trash-can text-xl"></i>削除</button>
+                    <button id="edit_submit" wire:click="save" class="btn bg-mydark text-mywhite w-full text-[15px] font-yusei hover:bg-mydark/80 mt-[10px]"><i class="fa-solid fa-paper-plane"></i>更新</button>
                     <a href="/post/{{ $post->id }}" class="text-[14px] text-right mt-2" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i> 投稿ページへ移動する</a>
                 </div>
             </form>

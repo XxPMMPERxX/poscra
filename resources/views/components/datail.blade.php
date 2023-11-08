@@ -2,7 +2,9 @@
     <form class="flex flex-col md:flex-row md:py-5 md:px-10 md:gap-[24px] gap-[10px]">
         <div class="md:w-3/5 w-full relative group">
             @if ($post->attachment->attachment_type == 'image')
-                <img id="detail_preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
+                <div class="flex justify-center">
+                    <img id="detail_preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
+                </div>
             @else
                 <div id="detail_main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-[430px]">
                     <canvas id="detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full rounded-lg"></canvas>
