@@ -4,6 +4,7 @@
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
             お気に入りの投稿一覧
         </div>
+        @if(auth()->user()->favorites()->get()->count() === 0) <div class="flex justify-center font-yusei my-5">お気に入り登録した投稿が表示されます</div> @endif
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
             @foreach(auth()->user()->favorites()->get() as $favorite)
                 <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
@@ -22,6 +23,7 @@
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">
             あなたの投稿一覧
         </div>
+        @if(count($myposts) === 0) <div class="flex justify-center font-yusei my-5">あなたが投稿した投稿が見れます👀</div> @endif
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
             @foreach($myposts as $mypost)
                 <livewire:edit-post :post="$mypost" :wire:key="$mypost->id" />
