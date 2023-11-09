@@ -1,4 +1,4 @@
-<div class="modal-box max-w-[1190px] bg-mywhite">
+<div class="modal-box max-w-[1190px] bg-mywhite @if($isModal === 'false') !max-h-none @endif">
     <form class="flex flex-col md:flex-row md:py-5 md:px-10 md:gap-[24px] gap-[10px]">
         <div class="md:w-3/5 w-full relative group">
             @if ($post->attachment->attachment_type == 'image')

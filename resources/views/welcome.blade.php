@@ -13,6 +13,7 @@
             トレンド
             <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/heart_new.png') }}" />
         </div>
+        @if (count($trend_posts) === 0)<div class="flex justify-center font-yusei my-10">ここには人気の投稿が表示されます</div> @endif
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
             @foreach($trend_posts as $trend_post)
                 <div class="carousel-item sm:mx-[12px] mx-[5px] relative cursor-pointer hover:opacity-70 duration-500">
@@ -28,6 +29,7 @@
             新着
             <img class="mx-2 w-[20px] h-[20px] mx-5" src="{{ Vite::asset('resources/images/new_offer_symbol.png') }}" />
         </div>
+        @if (count($new_posts) === 0)<div class="flex justify-center font-yusei my-10">ここには新着の投稿が表示されます</div> @endif
         <div class="carousel ml-[24px] 2xl:w-[1390px] 2xl:mx-auto 2xl:flex">
             @foreach($new_posts as $new_post)
                 <div class="carousel-item sm:mx-[12px] mx-[5px] cursor-pointer hover:opacity-70 duration-500">
@@ -38,6 +40,7 @@
     </div>
     <div id="contents" class="mt-10">
         <div class="font-yusei lg:text-[2vw] text-mydark text-center mb-5 text-[20px]" style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);">投稿一覧</div>
+        @if (count($posts) === 0)<div class="flex justify-center font-yusei my-10">ここには全ての投稿が表示されます</div> @endif
         <div class="flex flex-wrap md:max-w-[925px] max-w-[310px] mx-auto justify-around">
             @foreach ($posts as $post)
                 <div class="card card-compact w-[450px] bg-mywhite shadow-xl mb-5 hover:opacity-70 duration-500" onclick="openModal('{{ $modal_provider->getModalId($post) }}', '{{ $post->id }}', '{{ $post->title }}')">
