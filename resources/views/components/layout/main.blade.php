@@ -75,7 +75,7 @@
                             ログイン / 登録
                         </button>
                         <dialog id="login_modal" class="modal">
-                            <div class="modal-box max-w-[400px] bg-mywhite flex justify-center items-center h-[100px]">
+                            <div class="modal-box max-w-[400px] bg-mywhite flex flex-col justify-center items-center h-[200px]">
                                 <a href="{{ route('google_auth') }}">
                                     <button type="button" class="font-sans text-mywhite bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2">
                                         <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 19">
@@ -84,6 +84,7 @@
                                         Sign in with Google
                                     </button>
                                 </a>
+                                <a href="https://github.com/XxPMMPERxX/poscra-privacy-policy#readme" target="_blank"><i class="fa-solid fa-link"></i> プライバシーポリシー</a>
                             </div>
                             <form method="dialog" class="modal-backdrop bg-mydark/40">
                                 <button>close</button>
