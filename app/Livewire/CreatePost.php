@@ -32,7 +32,7 @@ class CreatePost extends Component
     protected $rules = [
         'title' => 'required|max:20',
         'description' => 'max:100',
-        'mcstructure' => 'required|file|max:20',
+        'mcstructure' => 'required|file|max:5120',
         'thumbnail' => 'required|file|max:5120',
         'attachment'    => 'required|file|max:5120',
     ];
