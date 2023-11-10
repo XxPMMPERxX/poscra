@@ -15,15 +15,27 @@ class GoogleAuthController extends Controller {
         if (!$googleUser) return redirect('/')->with('error_message', 'ログインエラーが発生しました。');
 
         //dd($googleUser->id);
-        $user = User::updateOrCreate([
-            'google_id' => $googleUser->getId(),
-        ], [
-            'name' => $googleUser->getName(),
-            'email' => $googleUser->getEmail(),
-            'google_token' => $googleUser->token,
-            'google_refresh_token' => $googleUser->refreshToken,
-            'email_verified_at' => now(),
-        ]);
+        if (
+            User::where('google_id', $googleUser->getId())
+                ->exists()
+        ) {
+            $user = User::where('google_id', $googleUser->getId())->first();
+            $user->email = $googleUser->getEmail();
+            $user->google_token = $googleUser->token;
+            $user->google_refresh_token = $googleUser->refreshToken;
+            $user->save();
+        } else {
+            $user = User::create(
+            [
+                'google_id' => $googleUser->getId(),
+                'name' => $googleUser->getName(),
+                'email' => $googleUser->getEmail(),
+                'google_token' => $googleUser->token,
+                'google_refresh_token' => $googleUser->refreshToken,
+                'email_verified_at' => now(),
+            ]);
+        }
+        
 
         if (!$user) return redirect('/')->with('error_message', 'ログインエラーが発生しました。');
 
