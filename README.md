@@ -5,7 +5,7 @@
 https://poscra.com/
 
 ## 開発環境
-Docker, PHP, npm, composer が必要
+Docker, PHP, composer が必要
 1. `composer install`
 
 2. copy & edit .env.example
