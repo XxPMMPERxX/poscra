@@ -12,6 +12,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <meta name="description" content="マインクラフト統合版の.mcstructureを共有するサービスです。好きな建築をとってきたり、みたり、アップロードしたりできます。" />
+        <meta name="keywords" content="マインクラフト,マイクラ,マイクラ統合版,MCBE,建築,ストラクチャーブロック,mcstructure" />
+
         <meta name="twitter:card" content="{{ $twitter_card_type ?? 'summary' }}" />
         <meta name="twitter:site" content="@poscra_" />
         <meta name="twitter:domain" content="https://twitter.com/poscra_" />
