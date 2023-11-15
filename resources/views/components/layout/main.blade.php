@@ -13,8 +13,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <meta name="twitter:card" content="{{ $twitter_card_type ?? 'summary' }}" />
-        <meta name="twitter:site" content="@gollilla_" />
-        <meta name="twitter:domain" content="https://twitter.com/gollilla_" />
+        <meta name="twitter:site" content="@poscra_" />
+        <meta name="twitter:domain" content="https://twitter.com/poscra_" />
 
         <meta property="og:url" content="{{ Request::url() }}" />
         <meta property="og:title" content="ポスクラ | {{ $title ?? '' }}" />
