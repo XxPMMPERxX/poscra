@@ -19,6 +19,9 @@ use App\Http\Controllers\TopPageController;
 */
 
 Route::get('/', [TopPageController::class, 'index']);
+Route::get('privacy-policy', function() {
+    return view('privacy-policy');
+})->name('privacy-policy');
 
 Route::get('/auth/redirect', function () {
     if (auth()->check()) return redirect('/dashboard');

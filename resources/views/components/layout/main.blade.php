@@ -78,7 +78,7 @@
                             ログイン / 登録
                         </button>
                         <dialog id="login_modal" class="modal">
-                            <div class="modal-box max-w-[400px] bg-mywhite flex flex-col justify-center items-center h-[200px]">
+                            <div class="modal-box max-w-[400px] bg-mywhite flex flex-col justify-center items-center h-[150px]">
                                 <a href="{{ route('google_auth') }}">
                                     <button type="button" class="font-sans text-mywhite bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2">
                                         <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 19">
@@ -87,7 +87,6 @@
                                         Sign in with Google
                                     </button>
                                 </a>
-                                <a href="https://github.com/XxPMMPERxX/poscra-privacy-policy#readme" target="_blank"><i class="fa-solid fa-link"></i> プライバシーポリシー</a>
                             </div>
                             <form method="dialog" class="modal-backdrop bg-mydark/40">
                                 <button>close</button>
@@ -97,9 +96,10 @@
                 </div>
             </div>
             {{ $slot }}
-            <div class="flex justify-center my-10 font-yusei text-mydark divide-x-2 divide-mydark/25 items-center">
-                <div class="w-2/4 flex justify-end pr-5"><div><i class="fa-regular fa-copyright"></i> 2023 ポスクラ</div></div>
-                <div class="w-2/4 flex justify-start pl-5"><a href="https://discord.gg/nJ9AfGWWQA" target="_blank"><i class="fa-brands fa-discord text-[25px]"></i></a></div>
+            <div class="flex justify-center py-10 font-yusei text-mydark items-center">
+                <div class="pr-5"><div><i class="fa-regular fa-copyright"></i> 2023 ポスクラ</div></div>
+                <div class=""><a href="https://discord.gg/nJ9AfGWWQA" target="_blank"><i class="fa-brands fa-discord text-[25px]"></i></a></div>
+                <div class="pl-5"><a href="{{ route('privacy-policy') }}" target="_blank" class="text-center font-yusei text-mydark"><i class="fa-solid fa-link"></i> プライバシーポリシー</a></div>
             </div>
         </div>
         @livewireScripts
