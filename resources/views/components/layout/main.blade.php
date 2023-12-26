@@ -15,7 +15,7 @@
         <meta name="description" content="マインクラフト統合版の.mcstructureを共有するサービスです。好きな建築をとってきたり、みたり、アップロードしたりできます。" />
         <meta name="keywords" content="マインクラフト,マイクラ,マイクラ統合版,MCBE,建築,ストラクチャーブロック,mcstructure" />
 
-        <meta name="twitter:card" content="{{ $twitter_card_type ?? 'summary' }}" />
+        <meta name="twitter:card" content="{{ $attributes->get('twitter_card_type') ?? 'summary' }}" />
         <meta name="twitter:site" content="@poscra_" />
         <meta name="twitter:domain" content="https://twitter.com/poscra_" />
 
@@ -78,7 +78,7 @@
                             ログイン / 登録
                         </button>
                         <dialog id="login_modal" class="modal">
-                            <div class="modal-box max-w-[400px] bg-mywhite flex flex-col justify-center items-center h-[150px]">
+                            <div class="modal-box max-w-[400px] bg-mywhite flex flex-col justify-center items-center h-[180px]">
                                 <a href="{{ route('google_auth') }}">
                                     <button type="button" class="font-sans text-mywhite bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2">
                                         <svg class="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 18 19">
@@ -87,6 +87,7 @@
                                         Sign in with Google
                                     </button>
                                 </a>
+                                <a href="{{ route('privacy-policy') }}" target="_blank" class="text-center font-yusei text-mydark mt-5"><i class="fa-solid fa-link"></i> プライバシーポリシー</a>
                             </div>
                             <form method="dialog" class="modal-backdrop bg-mydark/40">
                                 <button>close</button>
