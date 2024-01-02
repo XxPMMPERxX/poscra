@@ -97,6 +97,10 @@
                 </div>
             </div>
             {{ $slot }}
+            <div class="fixed bottom-[50px] right-[20px] w-[70px] h-[70px] rounded-full bg-myaccent text-center animate-bounce shadow-md opacity-[0.6] hover:opacity-[1.0] hover:cursor-pointer">
+                <img src="{{ Vite::asset('resources/images/pickel.png') }}" class="w-[40px] h-[40px] mx-auto mt-[5px] mb-[-10px]" />
+                <span class="text-mywhite font-yusei text-[12px]">つかいかた</span>
+            </div>
             <div class="flex justify-center py-10 font-yusei text-mydark items-center">
                 <div class="pr-5"><div><i class="fa-regular fa-copyright"></i> 2023 ポスクラ</div></div>
                 <div class=""><a href="https://discord.gg/nJ9AfGWWQA" target="_blank"><i class="fa-brands fa-discord text-[25px]"></i></a></div>
