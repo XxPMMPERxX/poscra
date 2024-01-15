@@ -197,7 +197,7 @@
                         <div class="w-1/2">
                             <ul>
                                 <li>⑦-1 建築の投稿</li>
-                                <li><a href="/dashboard" target="_blank" class="font-sans" tabindex="-1">ダッシュボード</a> にアクセス</li>
+                                <li><span class="font-sans cursor-pointer" onclick="window.open('/dashboard')">ダッシュボード</span> にアクセス</li>
                             </ul>
                         </div>
                     </div>
