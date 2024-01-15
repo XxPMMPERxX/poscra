@@ -105,7 +105,7 @@
                 <span class="text-mywhite font-yusei text-[12px]">つかいかた</span>
             </div>
             <dialog id="how_to_use" class="modal">
-                <div class="modal-box bg-mywhite max-w-[1190px] bg-mywhite flex flex-col gap-5 text-mydark font-yusei md:divide-none divide-y divide-gray-200">
+                <div class="modal-box bg-mywhite max-w-[1190px] max-h-[80%] bg-mywhite flex flex-col gap-5 text-mydark font-yusei md:divide-none divide-y divide-gray-200">
                     <h1 class="text-[20px]">つかいかた（投稿までの道のり）</h1>
                     <div class="flex gap-2.5">
                         <img src="{{ Vite::asset('resources/images/how_to_use/minecraft1.png') }}" class="w-1/2 object-contain" />
@@ -197,7 +197,7 @@
                         <div class="w-1/2">
                             <ul>
                                 <li>⑦-1 建築の投稿</li>
-                                <li><a href="/dashboard" target="_blank" class="font-sans">ダッシュボード</a> にアクセス</li>
+                                <li><a href="/dashboard" target="_blank" class="font-sans" tabindex="-1">ダッシュボード</a> にアクセス</li>
                             </ul>
                         </div>
                     </div>
@@ -206,7 +206,6 @@
                         <div class="w-1/2">
                             <ul>
                                 <li>⑦-2 建築の投稿</li>
-                                <li><a href="/dashboard" target="_blank" class="font-sans">ダッシュボード</a> にアクセス</li>
                                 <li>新規追加ボタンを押すと画像のモーダルが表示されます</li>
                                 <li>左側の大きい領域をクリックか、直接ファイルをドラッグアンドドロップで 先ほど出力した「glbファイル」をアップロード</li>
                                 <li>右側の mcstructure のファイル選択ボタンをクリックして、先ほど出力した「mcstructureファイル」をアップロード</li>
