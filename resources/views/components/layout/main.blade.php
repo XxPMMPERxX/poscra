@@ -98,6 +98,7 @@
             </div>
             {{ $slot }}
             <div
+              id="how_to_use_open"
               class="fixed bottom-[50px] right-[20px] w-[70px] h-[70px] rounded-full bg-myaccent text-center animate-bounce shadow-md opacity-[0.6] hover:opacity-[1.0] hover:cursor-pointer"
               onclick="how_to_use.show()"
             >

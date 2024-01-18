@@ -6,7 +6,7 @@
                     <img id="detail_preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
                 </div>
             @else
-                <div id="detail_main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-[430px]">
+                <div id="detail_main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-full">
                     <canvas id="detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full rounded-lg"></canvas>
                 </div>
                 <script>
@@ -92,6 +92,18 @@
         <div class="flex flex-col font-yusei text-mydark md:w-2/5 w-full">
             <div class="flex items-end font-yusei text-[24px] mb-[15px]">
                 {{ $post->title }}
+            </div>
+            <div class="mb-[5px]">
+                <a 
+                  href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
+                  class="twitter-share-button" 
+                  data-text="【{{ $post->title }}】by {{ $post->user->name }} &#010;{{ $post->description }}" 
+                  data-hashtags="マイクラ統合版,建築,ポスクラ" 
+                  data-show-count="false" 
+                  data-url="https://poscra.com/post/{{ $post->id }}">
+                    Tweet
+                </a>
+                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
             </div>
             <div class="flex font-yusei border-b-[1px] justify-between mb-[10px]">
                 <div>投稿日:</div>
