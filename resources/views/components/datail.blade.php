@@ -6,7 +6,7 @@
                     <img id="detail_preview_image_{{ str_replace('-', '_', $post->id) }}" class="object-contain h-[220px] md:h-[430px]" src="{{ Storage::url($post->attachment->attachment) }}">
                 </div>
             @else
-                <div id="detail_main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-full">
+                <div id="detail_main_canvas_{{ str_replace('-', '_', $post->id) }}" class="w-full h-[220px] md:h-full md:max-h-[500px]">
                     <canvas id="detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full rounded-lg"></canvas>
                 </div>
                 <script>
@@ -97,7 +97,7 @@
                 <a 
                   href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
                   class="twitter-share-button" 
-                  data-text="【{{ $post->title }}】by {{ $post->user->name }} &#010;{{ $post->description }}" 
+                  data-text="【{{ $post->title }}】by {{ $post->user->name }} &#010;{{ $post->description }}&#010;" 
                   data-hashtags="マイクラ統合版,建築,ポスクラ" 
                   data-show-count="false" 
                   data-url="https://poscra.com/post/{{ $post->id }}">
