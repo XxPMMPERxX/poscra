@@ -36,7 +36,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 Route::get('/post/{post_id}', function($post_id) {
     $post = App\Models\Post::findOrFail($post_id);
     return view('detail', ['post' => $post]);
-});
+})->name('detail');
 
 Route::get('/post/{post_id}/embed', function($post_id) {
     $post = App\Models\Post::findOrFail($post_id);

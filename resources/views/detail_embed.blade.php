@@ -3,9 +3,25 @@
     twitter_card_type="summary_large_image"
     isEmbed="true"
 >
+    <style>
+        html,body {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
     <x-slot:title>{{ $post->title }}</x-slot:title>
     <x-slot:description>{{ $post->description }}</x-slot:description>
-    <canvas id="detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full"></canvas>
+    <div class="flex flex-col h-full w-full">
+        <canvas id="detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}" class="!w-full !h-full"></canvas>
+        <div class="w-full bg-mywhite h-[15%] flex items-center justify-between">
+            <div class="font-yusei text-mydark text-[min(4vw,20px)] m-5">
+                <a href="{{ route('detail', ['post_id' => $post->id]) }}" target="_blank">{{ $post->title }} by {{ $post->user->name }}</a>
+            </div>
+            <div class="font-cpfont text-[min(4vw,20px)] mx-5 text-myaccent">
+                <a href="{{ url('/') }}" target="_blank">ポスクラ</a>
+            </div>
+        </div>
+    </div>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
             const canvas = document.getElementById("detail_mcstructure_preview_{{ str_replace('-', '_', $post->id) }}");
