@@ -38,6 +38,14 @@ Route::get('/post/{post_id}', function($post_id) {
     return view('detail', ['post' => $post]);
 });
 
+Route::get('/post/{post_id}/embed', function($post_id) {
+    $post = App\Models\Post::findOrFail($post_id);
+    if ($post->attachment->attachment_type !== "3dmodel") {
+        abort(404);
+    }
+    return view('detail_embed', ['post' => $post]);
+});
+
 Route::get('/post/{post_id}/download', function($post_id) {
     $post = App\Models\Post::findOrFail($post_id);
     $structure_name = explode(":",$post->attachment->structure_name);
