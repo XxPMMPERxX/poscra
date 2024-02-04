@@ -44,7 +44,7 @@ Route::get('/post/{post_id}/embed', function($post_id) {
         abort(404);
     }
     return view('detail_embed', ['post' => $post]);
-});
+})->name('detail_embed');
 
 Route::get('/post/{post_id}/download', function($post_id) {
     $post = App\Models\Post::findOrFail($post_id);

@@ -93,7 +93,7 @@
             <div class="flex items-end font-yusei text-[24px] mb-[15px]">
                 {{ $post->title }}
             </div>
-            <div class="mb-[5px]">
+            <div class="mb-[5px] flex items-center gap-[5px]">
                 <a 
                   href="https://twitter.com/share?ref_src=twsrc%5Etfw" 
                   class="twitter-share-button" 
@@ -104,6 +104,16 @@
                     Tweet
                 </a>
                 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <button type="button" id="clip_{{ str_replace('-', '_', $post->id) }}" class="btn btn-xs btn-warning text-mywhite">埋め込み</button>
+                <script>
+                    (() => {
+                        let btn = document.getElementById("clip_{{ str_replace('-', '_', $post->id) }}");
+                        btn.onclick = () => {
+                            let text = "<iframe src=\"{{ route('detail_embed', ['post_id' => $post->id]) }}\" width=\"500\" height=\"300\"></iframe>";
+                            navigator.clipboard.writeText(text).then(() => alert('埋め込みタグをコピーしました'));
+                        }
+                    })();
+                </script>
             </div>
             <div class="flex font-yusei border-b-[1px] justify-between mb-[10px]">
                 <div>投稿日:</div>
