@@ -25,6 +25,7 @@ class EditPost extends Component
 
     public $structure_name; // mcstructure の structureName
     public $attachment_path; // 3dmodelのパス（プレビュー用）
+    public $attachment_options; // 3dmodelのカメラ情報など
 
     public $isAttachmentChanged;
     protected $rules = [
@@ -47,6 +48,7 @@ class EditPost extends Component
         $this->structure_name = $attachment->structure_name;
         $this->attachment_path = $attachment->attachment;
         $this->attachment_type = $attachment->attachment_type;
+        $this->attachment_options = $attachment->attachment_options;
     }
 
     public function updatedAttachment() {
@@ -69,7 +71,13 @@ class EditPost extends Component
                 $this->attachment_type = '3dmodel';
 
                 $this->attachment_path = $this->attachment->store('public');
-                $this->dispatch('update_preview_' . str_replace('-', '_', $this->post->id), preview_url: Storage::url($this->attachment_path));
+                $this->dispatch(
+                    'update_preview_' . str_replace('-', '_', $this->post->id),
+                    previews: [
+                        "url" => Storage::url($this->attachment_path),
+                        "options" => null
+                    ]
+                );
                 break;
             default:
                 $this->addError('attachment_file_error', 'ファイル形式が不正です');
@@ -101,7 +109,8 @@ class EditPost extends Component
             'attachment', 
             'attachment_type', 
             'attachment_path', 
-            'thumbnail'
+            'thumbnail',
+            'attachment_options'
         ]);
     }
 
@@ -111,7 +120,6 @@ class EditPost extends Component
                 array_merge($this->rules, ['thumbnail'=>'required'])
                 : $this->rules
         );
-        //logger('clear validation');
 
         DB::transaction(function () {
             $this->post->title = $this->title;
@@ -124,23 +132,16 @@ class EditPost extends Component
             if ($this->thumbnail !== null) {
                 //logger('thumbnail_saved');
                 $attachment->thumbnail = $this->thumbnail->store('public');
+                $attachment->attachment_options = json_encode($this->attachment_options);
             }
 
-            /*if ($this->mcstructure !== null) {
-                $attachment->structure = $this->mcstructure->store('public');
-            }
-
-            if ($this->structure_name != $this->post->attachment->structure_name) {
-                $attachment->structure_name = $this->structure_name ?? 'mystructure:poscra_autorename' . time();
-            }*/
-            
             if ($this->attachment !== null) {
                 $attachment->attachment = $this->attachment_path ?? $this->attachment->store('public');
                 $attachment->attachment_type = $this->attachment_type;
             }
+
             $attachment->save();
 
-            //$this->dispatch('closeEdit');
             $this->reset();
 
             return redirect('/dashboard');
@@ -159,7 +160,15 @@ class EditPost extends Component
     }
 
     public function init(){
-        if ($this->attachment_type == "3dmodel") $this->dispatch('update_preview_' . str_replace('-', '_', $this->post->id), preview_url: Storage::url($this->attachment_path));
+        if ($this->attachment_type == "3dmodel") {
+            $this->dispatch(
+                'update_preview_' . str_replace('-', '_', $this->post->id),
+                previews: [
+                    'url' => Storage::url($this->attachment_path),
+                    'options' => $this->attachment_options
+                ],
+            );
+        }
     }
 
     public function resetOnClose() {

@@ -13,6 +13,9 @@ class Attachment extends Model
     use HasFactory, HasUuids;
      
     protected $table = "attachment";
+    protected $casts = [
+        'attachment_options' => 'json'
+    ];
 
     public function newUniqueId(): string
     {

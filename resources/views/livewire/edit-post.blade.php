@@ -78,6 +78,7 @@
             <button wire:click="resetOnClose">close</button>
         </form>
     </dialog>
+    @script
     <script>
         (() => {
             const dropzone = document.getElementById("dropzone_{{ str_replace('-', '_', $post->id) }}");
@@ -86,6 +87,27 @@
             const setThumbnail = document.getElementById("set_thumbnail_{{ str_replace('-', '_', $post->id) }}"); // button
             
             const canvas = document.getElementById("mcstructure_preview_{{ str_replace('-', '_', $post->id) }}");
+
+            const renderer = new THREE.WebGLRenderer({
+                    canvas: canvas,
+                    antialias: true,
+                    preserveDrawingBuffer: true,
+            });
+            let width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
+            let height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
+
+            renderer.setPixelRatio(1);
+            renderer.setSize(width, height);
+
+            const scene = new THREE.Scene();
+
+            const camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
+            camera.position.set(0, -5000, -20000);
+
+            const controls = new OrbitControls(camera, document.getElementById('main_canvas_{{ str_replace('-', '_', $post->id) }}'));
+            controls.addEventListener("change", function (ev) {
+                setThumbnail.disabled = false;
+            });
 
             dropzone.addEventListener('dragover', (ev) => {
                 ev.preventDefault();
@@ -119,32 +141,32 @@
                     thumbnailInput.files = dt.files;
                     thumbnailInput.dispatchEvent(new Event('change'));
                 });
+                $wire.$set(
+                    'attachment_options',
+                    {
+                        position: camera.position,
+                        rotation: camera.rotation,
+                        zoom: camera.zoom,
+                        target: controls.target
+                    }
+                );
             });
 
             window.addEventListener('update_preview_{{ str_replace('-', '_', $post->id) }}', (ev) => {
-                const renderer = new THREE.WebGLRenderer({
-                    canvas: canvas,
-                    antialias: true,
-                    preserveDrawingBuffer: true,
-                });
-                let width = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().width;
-                let height = document.getElementById("main_canvas_{{ str_replace('-', '_', $post->id) }}").getBoundingClientRect().height;
-
-                renderer.setPixelRatio(1);
-                renderer.setSize(width, height);
-
-                const scene = new THREE.Scene();
-
-                const camera = new THREE.PerspectiveCamera(45, width / height, 1, 100000);
-                camera.position.set(0, -5000, -20000);
-
-                const controls = new OrbitControls(camera, document.getElementById('main_canvas_{{ str_replace('-', '_', $post->id) }}'));
-                controls.addEventListener("change", function (ev) {
-                    setThumbnail.disabled = false;
-                });
-
                 const loader = new GLTFLoader();
-                const url = ev.detail.preview_url;
+                const url = ev.detail.previews.url;
+                const options = JSON.parse(ev.detail.previews.options);
+                
+                if (options) {
+                    camera.position.set(options.position.x, options.position.y, options.position.z);
+                    camera.rotation.set(options.rotation.x, options.rotation.y, options.rotation.z)
+                    camera.zoom = options.zoom;
+
+                    controls.target.x = options.target.x;
+                    controls.target.y = options.target.y;
+                    controls.target.z = options.target.z;
+                }
+                
 
                 let model = null;
                 loader.load(
@@ -191,4 +213,5 @@
         })();
         
     </script>
+    @endscript
 </div>

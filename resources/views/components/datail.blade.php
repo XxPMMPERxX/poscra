@@ -35,6 +35,17 @@
                             const controls = new OrbitControls(camera, document.getElementById('detail_main_canvas_{{ str_replace('-', '_', $post->id) }}'));
                 
                             const loader = new GLTFLoader();
+                            const options = {{ Js::From(json_decode($post->attachment->attachment_options)) }}
+                
+                            if (options) {
+                                camera.position.set(options.position.x, options.position.y, options.position.z);
+                                camera.rotation.set(options.rotation.x, options.rotation.y, options.rotation.z)
+                                camera.zoom = options.zoom;
+
+                                controls.target.x = options.target.x;
+                                controls.target.y = options.target.y;
+                                controls.target.z = options.target.z;
+                            }
                             const url = "{{ Storage::url($post->attachment->attachment) }}";
                 
                             let model = null;

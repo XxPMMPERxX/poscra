@@ -28,6 +28,7 @@ class CreatePost extends Component
 
     //public $structure_name; // mcstructure の structureName
     public $attachment_path; // 3dmodelのパス（プレビュー用）
+    public $attachment_options; // 3dmodelのカメラ情報など
 
     protected $rules = [
         'title' => 'required|max:20',
@@ -126,6 +127,10 @@ class CreatePost extends Component
 
             $attachment->attachment = $this->attachment_path ?? $this->attachment->store('public');
             $attachment->attachment_type = $this->attachment_type;
+            if ($this->attachment_options !== null) {
+                $attachment->attachment_options = json_encode($this->attachment_options);
+            }
+            
             $attachment->save();
 
             //$this->dispatch('closeEdit');
@@ -150,34 +155,7 @@ class CreatePost extends Component
             $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
             return false;
         }
-
-        /*$block_position_datas = $mcstructure
-            ->getCompound('structure')
-            ?->getCompound('palette')
-            ?->getCompound('default')
-            ?->getCompound('block_position_data');
-
-        if (!$block_position_datas) {
-            $this->addError('mcstructure_file_error', 'mcstructureファイルが不正です');
-            return false;
-        }
-
-        $structure_name = '';
-        foreach ($block_position_datas as $block_position_data){
-            if (isset($block_position_data['block_entity_data']['structureName'])) {
-                $structure_name = $block_position_data['block_entity_data']['structureName']->getValue();
-                break;
-            }
-        }
-        if (!$structure_name) {
-            $this->addError('mcstructure_file_error', 'structureNameが読み取れませんでした。');
-            return false;
-        }
-        $structure_name = explode(":", $structure_name);
-        if (count($structure_name) !== 2) {
-            $this->addError('mcstructure_file_error', 'structureNameが不正です。');
-            return false;
-        }*/
+        
         return true;
     }
 
