@@ -39,14 +39,24 @@ class DeleteTrashFiles extends Command
 
             if (in_array($file, $ignoreFiles)) continue;
 
-            if(
-                !Attachment::where('thumbnail', $file)
-                    ->orWhere('structure', $file)
-                    ->orWhere('attachment', $file)
-                    ->exists()
-            ) {
-                $deleteFiles[] = $file;
+            if (Storage::mimeType($file) === "image/webp") {
+                // webp だとdbに保存されてないので、消されるのを回避するよう
+                $file_temp = str_replace(".webp", "", $file);
+                var_dump($file_temp);
+                if (!Attachment::where('thumbnail', $file_temp)->exists()) {
+                    $deleteFiles[] = $file;
+                }
+            } else {
+                if(
+                    !Attachment::where('thumbnail', $file)
+                        ->orWhere('structure', $file)
+                        ->orWhere('attachment', $file)
+                        ->exists()
+                ) {
+                    $deleteFiles[] = $file;
+                }
             }
+            
         }
 
         Storage::delete($deleteFiles);
