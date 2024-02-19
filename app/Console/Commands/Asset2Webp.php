@@ -17,7 +17,7 @@ class Asset2Webp extends Command
      *
      * @var string
      */
-    protected $signature = 'app:asset-to-webp';
+    protected $signature = 'app:asset-to-webp {quality?}';
 
     /**
      * The console command description.
@@ -34,6 +34,7 @@ class Asset2Webp extends Command
 
         $files = glob(public_path('build/assets') . "/*");
         $finfo = new finfo();
+        $quality = $this->argument('quality') ?? 80;
         
         foreach ($files as $file) {
             if ($finfo->file($file, FILEINFO_MIME_TYPE) === "image/png") {
@@ -42,7 +43,7 @@ class Asset2Webp extends Command
                 imagepalettetotruecolor($img);
                 imagealphablending($img, true);
                 imagesavealpha($img, true);
-                imagewebp($img, $file . ".webp");
+                imagewebp($img, $file . ".webp", $quality);
                 $webpFiles[] = $file;
             }
         }
