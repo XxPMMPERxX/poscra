@@ -114,7 +114,6 @@
                   data-url="https://poscra.com/post/{{ $post->id }}">
                     Tweet
                 </a>
-                <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                 @if ($post->attachment->attachment_type === "3dmodel")
                     <button type="button" id="clip_{{ str_replace('-', '_', $post->id) }}" class="btn btn-xs btn-warning text-mywhite">埋め込み</button>
                     <script>

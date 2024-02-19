@@ -27,9 +27,6 @@
 
         <title>ポスクラ | {{ $title ?? '' }}</title>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
         @livewireStyles
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
@@ -108,6 +105,7 @@
                 </div>
             @endif
         </div>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         @livewireScripts
     </body>
 </html>
